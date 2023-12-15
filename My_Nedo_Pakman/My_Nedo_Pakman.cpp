@@ -46,7 +46,11 @@ LRESULT CALLBACK Procedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 		break;
 	case WM_PAINT:
 	{
+		PAINTSTRUCT ps;
+		BeginPaint(hWnd, &ps);
+		painter.init_hdc(ps);
 		painter.paint_all(cond);
+		EndPaint(hWnd, &ps);
 		break;
 	}
 	default:

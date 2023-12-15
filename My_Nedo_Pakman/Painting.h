@@ -12,9 +12,14 @@ public:
 
 class WinApi_painter : public Painter {
 	HWND hWnd = NULL;
-	PAINTSTRUCT ps;
+	HDC hdc;
 public:
-	void init_hWnd(HWND hwnd);
+	void init_hWnd(HWND hwnd) {
+		hWnd = hwnd;
+	}
+	void init_hdc(PAINTSTRUCT& ps_) {
+		hdc = ps_.hdc;
+	}
 	void paint_button(Condition& cond);
 	void paint_field(Condition& cond);
 	void paint_all(Condition& cond);
