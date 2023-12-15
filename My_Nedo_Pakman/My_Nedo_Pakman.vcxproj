@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Condition.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Painting.h" />
     <ClInclude Include="Walls_map.h" />
   </ItemGroup>

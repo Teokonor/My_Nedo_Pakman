@@ -18,8 +18,9 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 		return -1;
 	}
 	HWND hWnd = CreateWindowExW(0, L"MainWndClass", L"My Nedo Pakman", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 
-		300, 100, 1005, 705, NULL, NULL, NULL, NULL);
+		window_start_x, window_start_y, window_start_width , window_start_height, NULL, NULL, NULL, NULL);
 
+	cond.init_condition("save_condition");
 	painter.init_hWnd(hWnd);
 	
 	MSG main_msg;
@@ -45,7 +46,7 @@ LRESULT CALLBACK Procedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 		break;
 	case WM_PAINT:
 	{
-		painter.paint_button();
+		painter.paint_all(cond);
 		break;
 	}
 	default:
