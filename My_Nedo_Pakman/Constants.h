@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 // cond.paint
 #define NOT_PAINT 0
 #define PAINT_BUTTON 1
@@ -29,3 +31,13 @@ const size_t playing_field_height = 101, playing_field_width = 185;
 
 const int button_width = 60, button_height = 60, buttons_coord_y = 20,
 buttons_coord_x[5] = { 1005 / 2 - 30, 20, 100, 1005 - 160, 1005 - 80 };
+
+const std::string button_file_names[7][2][2] = { 
+	{ { "button_play_lite_up.bmp", "button_play_lite_down.bmp" }, { "button_play_dark_up.bmp", "button_play_dark_down.bmp" } },
+	{ { "button_maps_lite_up.bmp", "button_maps_lite_down.bmp" }, { "button_maps_dark_up.bmp", "button_maps_dark_down.bmp" } },
+	{ { "button_difficulty_lite_up.bmp", "button_difficulty_lite_down.bmp" }, { "button_difficulty_dark_up.bmp", "button_difficulty_dark_down.bmp" } },
+	{ { "button_tools_lite_up.bmp", "button_tools_lite_down.bmp" }, { "button_tools_dark_up.bmp", "button_tools_dark_down.bmp" } },
+	{ { "button_help_lite_up.bmp", "button_help_lite_down.bmp" }, { "button_help_dark_up.bmp", "button_help_dark_down.bmp" } },
+	{ { "button_back_lite_up.bmp", "button_back_lite_down.bmp" }, { "button_back_dark_up.bmp", "button_back_dark_down.bmp" } },
+	{ { "button_pause_lite_up.bmp", "button_pause_lite_down.bmp" }, { "button_pause_dark_up.bmp", "button_pause_dark_down.bmp" } },
+};

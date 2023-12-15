@@ -6,7 +6,7 @@ Condition::Condition() {
 }
 
 void Condition::init_condition(std::istream& input) {
-	input >> status >> map >> difficulty >> theme_is_light;
+	input >> status >> map >> difficulty >> theme_is_dark;
 	walls_map.read_walls("first_walls_map.txt");
 	BG_color = get_color(0xFFF1CD);
 	field_color = get_color(0xFFECBB);

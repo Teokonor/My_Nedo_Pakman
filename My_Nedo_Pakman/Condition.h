@@ -2,7 +2,6 @@
 #include "Constants.h"
 #include "Walls_map.h"
 #include <istream>
-#include <string>
 #include <array>
 #include <Windows.h>
 
@@ -11,7 +10,7 @@ public:
 	HWND hWnd;
 	size_t status, map, difficulty;
 	int paint = PAINT_ALL, pressed_button = BUTTON_PLAY;
-	bool theme_is_light, button_is_pressed = false;
+	bool theme_is_dark, button_is_pressed = false;
 	COLORREF BG_color, field_color, walls_color;
 	Walls_map walls_map;
 	std::array<std::string, textures_quantity> Textures;
