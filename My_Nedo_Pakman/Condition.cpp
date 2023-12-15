@@ -11,8 +11,8 @@ void Condition::init_condition(std::istream& input) {
 	BG_color = get_color(0xFFF1CD);
 	field_color = get_color(0xFFECBB);
 	walls_color = get_color(0xBBA05B);
-	Textures = { "", "", "button_play_lite_up.bmp", 
-		"button_maps_lite_up.bmp", "button_difficulty_lite_up.bmp", "button_tools_lite_up.bmp", "button_help_lite_up.bmp" };
+	Textures = { "button_play_lite_up.bmp", "button_maps_lite_up.bmp", "button_difficulty_lite_up.bmp", "button_tools_lite_up.bmp", 
+		"button_help_lite_up.bmp", "", "" };
 }
 
 void Condition::init_condition(const char file_name[]) {

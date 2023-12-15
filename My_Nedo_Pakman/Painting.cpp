@@ -38,7 +38,8 @@ void WinApi_painter::paint_button(Condition& cond) {
 	GetObjectW(hBitmap, sizeof(BITMAP), &Bitmap);
 	hCompatibleDC = CreateCompatibleDC(hdc);
 	hOldBitmap = SelectObject(hCompatibleDC, hBitmap);
-	StretchBlt(hdc, 20, 20, 60, 60, hCompatibleDC, 0, 0, Bitmap.bmWidth, Bitmap.bmHeight, SRCCOPY);
+	StretchBlt(hdc, buttons_coord_x[cond.pressed_button], buttons_coord_y, button_width, button_height,
+		hCompatibleDC, 0, 0, Bitmap.bmWidth, Bitmap.bmHeight, SRCCOPY);
 	SelectObject(hCompatibleDC, hOldBitmap);
 	DeleteObject(hBitmap);
 	DeleteDC(hCompatibleDC);
@@ -60,7 +61,10 @@ void WinApi_painter::paint_field(Condition& cond) {
 
 void WinApi_painter::paint_all(Condition& cond) {
 	paint_field(cond);
-	paint_button(cond);
+	for (int button_id = BUTTON_PLAY; button_id <= BUTTON_HELP; button_id++) {
+		cond.pressed_button = button_id;
+		paint_button(cond);
+	}
 }
 
 void WinApi_painter::paint_autentification_page(Condition& cond) {
