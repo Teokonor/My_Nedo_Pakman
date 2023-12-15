@@ -127,12 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Buttons.cpp" />
     <ClCompile Include="Condition.cpp" />
     <ClCompile Include="Painting.cpp" />
     <ClCompile Include="My_Nedo_Pakman.cpp" />
     <ClCompile Include="Walls_map.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Buttons.h" />
     <ClInclude Include="Condition.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Painting.h" />

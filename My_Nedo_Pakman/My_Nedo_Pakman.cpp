@@ -1,5 +1,7 @@
 #include "Condition.h"
+#include "Buttons.h"
 #include "Painting.h"
+#include <windowsx.h>
 
 void InitWndClass(WNDCLASS& wnd, HBRUSH BGColor, HCURSOR cursor, HINSTANCE hInst, HICON icon, LPCWSTR name, WNDPROC procedure);
 
@@ -17,11 +19,11 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	if (!RegisterClassW(&main_wind)) {
 		return -1;
 	}
-	HWND hWnd = CreateWindowExW(0, L"MainWndClass", L"My Nedo Pakman", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 
+	cond.hWnd = CreateWindowExW(0, L"MainWndClass", L"My Nedo Pakman", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 
 		window_start_x, window_start_y, window_start_width , window_start_height, NULL, NULL, NULL, NULL);
 
 	cond.init_condition("save_condition");
-	painter.init_hWnd(hWnd);
+	painter.init_hWnd(cond.hWnd);
 	
 	MSG main_msg;
 	while (GetMessage(&main_msg, NULL, NULL, NULL)) {
@@ -38,11 +40,20 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 LRESULT CALLBACK Procedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 	switch (msg)
 	{
-
 	case WM_CREATE:
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
+		break;
+	case WM_LBUTTONDOWN:
+		left_button_down(cond, GET_X_LPARAM(lp), GET_Y_LPARAM(lp));
+		RedrawWindow(hWnd, NULL, NULL, RDW_UPDATENOW | RDW_INVALIDATE);
+		break;
+	case WM_LBUTTONUP:
+		left_button_up(cond, GET_X_LPARAM(lp), GET_Y_LPARAM(lp));
+		RedrawWindow(hWnd, NULL, NULL, RDW_UPDATENOW | RDW_INVALIDATE);
+		break;
+	case WM_KEYDOWN:
 		break;
 	case WM_PAINT:
 	{
