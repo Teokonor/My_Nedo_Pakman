@@ -130,10 +130,12 @@
     <ClCompile Include="Condition.cpp" />
     <ClCompile Include="Painting.cpp" />
     <ClCompile Include="My_Nedo_Pakman.cpp" />
+    <ClCompile Include="Walls_map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Condition.h" />
     <ClInclude Include="Painting.h" />
+    <ClInclude Include="Walls_map.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
