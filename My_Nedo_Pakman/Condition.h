@@ -7,6 +7,7 @@
 class Condition {
 public:
 	size_t status, map, difficulty;
+	int paint = PAINT_ALL, pressed_button;
 	bool theme_is_light;
 	COLORREF BG_color, field_color, walls_color;
 	Walls_map walls_map;

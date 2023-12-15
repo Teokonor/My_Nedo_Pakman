@@ -1,5 +1,23 @@
 #include "Painting.h"
 
+void WinApi_painter::paint(Condition& cond) {
+	switch (cond.paint)
+	{
+	case PAINT_BUTTON:
+		paint_button(cond);
+		break;
+	case PAINT_FIELD:
+		paint_field(cond);
+		break;
+	case PAINT_ALL:
+		paint_all(cond);
+		break;
+	default:
+		break;
+	}
+	cond.paint = NOT_PAINT;
+}
+
 void WinApi_painter::paint_button(Condition& cond) {
 	HDC hCompatibleDC;
 	HANDLE hBitmap, hOldBitmap;

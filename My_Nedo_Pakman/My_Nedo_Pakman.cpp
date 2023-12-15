@@ -49,7 +49,7 @@ LRESULT CALLBACK Procedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 		PAINTSTRUCT ps;
 		BeginPaint(hWnd, &ps);
 		painter.init_hdc(ps);
-		painter.paint_all(cond);
+		painter.paint(cond);
 		EndPaint(hWnd, &ps);
 		break;
 	}
