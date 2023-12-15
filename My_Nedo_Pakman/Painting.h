@@ -4,7 +4,7 @@
 
 class Painter {
 public:
-	virtual void paint(Condition& cond) = 0;
+	virtual void paint(Condition& cond);
 	virtual void paint_button(Condition& cond) = 0;
 	virtual void paint_field(Condition& cond) = 0;
 	virtual void paint_all(Condition& cond) = 0;
@@ -21,7 +21,7 @@ public:
 	void init_hdc(PAINTSTRUCT& ps_) {
 		hdc = ps_.hdc;
 	}
-	void paint(Condition& cond);
+	//void paint(Condition& cond);
 	void paint_button(Condition& cond);
 	void paint_field(Condition& cond);
 	void paint_all(Condition& cond);

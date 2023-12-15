@@ -1,11 +1,22 @@
 #include "Painting.h"
 
-void WinApi_painter::paint(Condition& cond) {
+LPCWSTR stowchar(std::string str) {
+	std::wstring wstr = std::wstring(str.begin(), str.end());
+	return wstr.c_str();
+}
+
+void Painter::paint(Condition& cond) {
 	switch (cond.paint)
 	{
 	case PAINT_BUTTON:
+	{
+		int pressed_button = cond.pressed_button;
 		paint_button(cond);
+		cond.pressed_button = BUTTON_PLAY;
+		paint_button(cond);
+		cond.pressed_button = pressed_button;
 		break;
+	}
 	case PAINT_FIELD:
 		paint_field(cond);
 		break;
@@ -22,7 +33,8 @@ void WinApi_painter::paint_button(Condition& cond) {
 	HDC hCompatibleDC;
 	HANDLE hBitmap, hOldBitmap;
 	BITMAP Bitmap;
-	hBitmap = LoadImage(NULL, L"button_maps_lite_up.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	LPCWSTR file_name = stowchar(cond.Textures[cond.pressed_button]);
+	hBitmap = LoadImageW(NULL, file_name, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	GetObjectW(hBitmap, sizeof(BITMAP), &Bitmap);
 	hCompatibleDC = CreateCompatibleDC(hdc);
 	hOldBitmap = SelectObject(hCompatibleDC, hBitmap);

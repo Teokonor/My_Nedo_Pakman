@@ -2,15 +2,18 @@
 #include "Constants.h"
 #include "Walls_map.h"
 #include <istream>
+#include <string>
+#include <array>
 #include <Windows.h>
 
 class Condition {
 public:
 	size_t status, map, difficulty;
-	int paint = PAINT_ALL, pressed_button;
+	int paint = PAINT_ALL, pressed_button = BUTTON_PLAY;
 	bool theme_is_light;
 	COLORREF BG_color, field_color, walls_color;
 	Walls_map walls_map;
+	std::array<std::string, textures_quantity> Textures;
 
 	Condition();
 	void init_condition(std::istream& input);
@@ -19,8 +22,4 @@ public:
 	Condition& operator=(Condition& other) = delete;
 
 	COLORREF get_color(unsigned long HEX_code);
-};
-
-class Textures {
-
 };
