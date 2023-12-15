@@ -12,8 +12,9 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	MSG main_msg;
 	while (GetMessage(&main_msg, NULL, NULL, NULL)) {
 		TranslateMessage(&main_msg);
-		DispatchMessage(&main_msg);
+		DispatchMessageW(&main_msg);
 	}
 
 	return 0;
 }
+

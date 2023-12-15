@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Condition.cpp" />
     <ClCompile Include="Procedure.cpp" />
     <ClCompile Include="My_Nedo_Pakman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Condition.h" />
     <ClInclude Include="Procedure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
