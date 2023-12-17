@@ -7,10 +7,14 @@ Condition::Condition() {
 
 void Condition::init_condition(std::istream& input) {
 	input >> status >> map >> difficulty >> theme_is_dark;
-	walls_map.read_walls("map0.txt");
-	BG_color = get_color(0xFFF1CD);
-	field_color = get_color(0xFFECBB);
-	walls_color = get_color(0xBBA05B);
+	walls_map.read_walls(map_file_names[map]);
+	BG_color = get_color(BG_colors[theme_is_dark]);
+	field_color = get_color(field_colors[theme_is_dark]);
+	walls_color = get_color(walls_colors[theme_is_dark]);
+	Textures.fill("");
+	for (size_t button_num = 0; button_num < BUTTON_HELP; button_num++) {
+		Textures[button_num] = button_file_names[button_num][theme_is_dark][button_is_pressed];
+	}
 	Textures = { "button_play_lite_up.bmp", "button_maps_lite_up.bmp", "button_difficulty_lite_up.bmp", "button_tools_lite_up.bmp", 
 		"button_help_lite_up.bmp", "", "" };
 }

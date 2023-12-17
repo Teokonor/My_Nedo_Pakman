@@ -48,3 +48,5 @@ const std::string button_file_names[7][2][2] = {
 	{ { "button_back_lite_up.bmp", "button_back_lite_down.bmp" }, { "button_back_dark_up.bmp", "button_back_dark_down.bmp" } },
 	{ { "button_pause_lite_up.bmp", "button_pause_lite_down.bmp" }, { "button_pause_dark_up.bmp", "button_pause_dark_down.bmp" } },
 };
+
+const size_t BG_colors[2] = { 0xFFF1CD, 0 }, field_colors[2] = { 0xFFECBB, 0 }, walls_colors[2] = { 0xBBA05B, 0 };
