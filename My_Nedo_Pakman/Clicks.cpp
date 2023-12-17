@@ -103,6 +103,7 @@ void choosing_theme(Condition& cond, int x, int y) {
 		cond.theme_is_dark = !cond.theme_is_dark;
 		cond.init_colors();
 		cond.init_textures();
+		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
 		cond.paint = PAINT_ALL;
 	}
 }
