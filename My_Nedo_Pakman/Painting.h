@@ -27,13 +27,17 @@ public:
 	void init_hdc(PAINTSTRUCT& ps_) {
 		hdc = ps_.hdc;
 	}
+	void paint_icon(int x, int y, int width, int height, std::string file_name);
+
 	void paint_button(Condition& cond);
+
 	void paint_field(Condition& cond);
 	void paint_playing_field(Condition& cond);
 	void paint_maps_field(Condition& cond);
 	void paint_difficulties_field(Condition& cond);
 	void paint_tools_field(Condition& cond);
 	void paint_help_field(Condition& cond);
+
 	void paint_all(Condition& cond);
 	void paint_autentification_page(Condition& cond);
 };

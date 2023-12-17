@@ -40,20 +40,22 @@ void Painter::paint(Condition& cond) {
 	cond.paint = NOT_PAINT;
 }
 
-void WinApi_painter::paint_button(Condition& cond) {
+void WinApi_painter::paint_icon(int x, int y, int width, int height, std::string file_name) {
 	HDC hCompatibleDC;
 	HANDLE hBitmap, hOldBitmap;
 	BITMAP Bitmap;
-	LPCWSTR file_name = stowchar(cond.Textures[cond.pressed_button]);
-	hBitmap = LoadImageW(NULL, file_name, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	hBitmap = LoadImageW(NULL, stowchar(file_name), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	GetObjectW(hBitmap, sizeof(BITMAP), &Bitmap);
 	hCompatibleDC = CreateCompatibleDC(hdc);
 	hOldBitmap = SelectObject(hCompatibleDC, hBitmap);
-	StretchBlt(hdc, buttons_coord_x[cond.pressed_button], buttons_coord_y, button_width, button_height,
-		hCompatibleDC, 0, 0, Bitmap.bmWidth, Bitmap.bmHeight, SRCCOPY);
+	StretchBlt(hdc, x, y, width, height, hCompatibleDC, 0, 0, Bitmap.bmWidth, Bitmap.bmHeight, SRCCOPY);
 	SelectObject(hCompatibleDC, hOldBitmap);
 	DeleteObject(hBitmap);
 	DeleteDC(hCompatibleDC);
+}
+
+void WinApi_painter::paint_button(Condition& cond) {
+	paint_icon(buttons_coord_x[cond.pressed_button], buttons_coord_y, button_width, button_height, cond.Textures[cond.pressed_button]);
 }
 
 void WinApi_painter::paint_field(Condition& cond) {
