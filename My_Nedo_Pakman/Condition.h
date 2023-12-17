@@ -20,6 +20,8 @@ public:
 	Condition();
 	void init_condition(std::istream& input);
 	void init_condition(const char file_name[]);
+	void init_textures();
+	void init_colors();
 	Condition(Condition& other) = delete;
 	Condition& operator=(Condition& other) = delete;
 	void save_condition(std::ostream& output);

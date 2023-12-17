@@ -8,20 +8,28 @@ Condition::Condition() {
 void Condition::init_condition(std::istream& input) {
 	input >> map >> difficulty >> theme_is_dark;
 	walls_map.read_walls(map_file_names[map]);
-	BG_color = get_color(BG_colors[theme_is_dark]);
-	field_color = get_color(field_colors[theme_is_dark]);
-	walls_color = get_color(walls_colors[theme_is_dark]);
+	init_colors();
 	Textures.fill("");
-	for (size_t button_num = 0; button_num <= BUTTON_HELP; button_num++) {
-		Textures[button_num] = button_file_names[button_num][theme_is_dark][button_is_pressed];
-	}
-	Textures[TEXTURE_DIFFICULTY] = difficulty_file_names[difficulty][theme_is_dark];
+	init_textures();
 }
 
 void Condition::init_condition(const char file_name[]) {
 	std::ifstream input(file_name);
 	init_condition(input);
 	input.close();
+}
+
+void Condition::init_textures() {
+	for (size_t button_num = 0; button_num <= BUTTON_HELP; button_num++) {
+		Textures[button_num] = button_file_names[button_num][theme_is_dark][button_is_pressed];
+	}
+	Textures[TEXTURE_DIFFICULTY] = difficulty_file_names[difficulty][theme_is_dark];
+}
+
+void Condition::init_colors() {
+	BG_color = get_color(BG_colors[theme_is_dark]);
+	field_color = get_color(field_colors[theme_is_dark]);
+	walls_color = get_color(walls_colors[theme_is_dark]);
 }
 
 COLORREF Condition::get_color(unsigned long HEX_code) {

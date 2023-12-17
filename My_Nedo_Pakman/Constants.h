@@ -77,6 +77,10 @@ const std::string difficulty_file_names[4][2] = {
 const int difficulties_dist = 10, dificulties_text_width = 140;
 const std::wstring difficulties_names [4] = { L"лёгкая", L"средняя", L"сложная", L"молния" };
 
-const size_t BG_colors[2] = { /*0xFFF1CD*/0xF8EACD, 0 }, field_colors[2] = { 0xFFECBB, 0 }, walls_colors[2] = { 0xBBA05B, 0 };
+const std::wstring tools_text = L"Сменить тему";
+const int tools_text_width = 250, tools_text_height = 40;
+
+const size_t BG_colors[2] = { /*0xFFF1CD*/0xF8EACD, 0x202020 }, 
+	field_colors[2] = { 0xFFECBB, 0x303030 }, walls_colors[2] = { 0xBBA05B, 0x101010 };
 
 const std::wstring help_text = L"Здесь инфа \nОп новая строка\n0:\n1:\n2:\n3:\n4:\n5:\n6:\n7:\n8:\n9:";

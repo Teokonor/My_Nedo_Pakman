@@ -63,6 +63,7 @@ void field_click(Condition& cond, int x, int y) {
 		choosing_difficulty(cond, x, y);
 		break;
 	case 5:
+		choosing_theme(cond, x, y);
 		break;
 	default:
 		break;
@@ -94,5 +95,14 @@ void choosing_difficulty(Condition& cond, int x, int y) {
 		cond.difficulty = diff_num;
 		cond.Textures[TEXTURE_DIFFICULTY] = difficulty_file_names[diff_num][cond.theme_is_dark];
 		cond.paint = PAINT_DIFFICULTY;
+	}
+}
+
+void choosing_theme(Condition& cond, int x, int y) {
+	if (x >= field_x + 5 && x <= field_x + 5 + tools_text_width && y >= field_y + 5 && y <= field_y + 5 + tools_text_height) {
+		cond.theme_is_dark = !cond.theme_is_dark;
+		cond.init_colors();
+		cond.init_textures();
+		cond.paint = PAINT_ALL;
 	}
 }
