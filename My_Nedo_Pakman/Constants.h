@@ -51,7 +51,7 @@ const std::string button_file_names[7][2][2] = {
 
 #define FUEL_TIMER 0
 #define SCORE_COUNTER 1
-#define TIMER 2
+#define GAME_TIMER 2
 #define DIFFICULTY 3
 #define STARS 4
 #define SCORE_RECORD 5
@@ -59,8 +59,8 @@ const std::string button_file_names[7][2][2] = {
 #define Y_coord 1
 #define WIDTH 2
 #define HEIGHT 3
-const int icons[6][4] = { { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, 
-	{ 600, 100, 40, 40 }, { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, };
+const int icons[6][4] = { { 40, 100, 72, 40 }, { 132, 102, 40, 36 }, { 1005 / 2 - 36, 100, 72, 40 }, 
+	{ 600, 100, 40, 40 }, { 0, 100, 0, 40 }, { 1005 - 40 - 40, 102, 40, 36 } };
 //const std::string icons_file_names[6][2][2] = {
 //	{ { "", "" }, { "", "" } },
 //	{ { "", "" }, { "", "" } },
@@ -82,5 +82,6 @@ const int tools_text_width = 250, tools_text_height = 40;
 
 const size_t BG_colors[2] = { /*0xFFF1CD*/0xF8EACD, 0x202020 }, field_colors[2] = { 0xFFECBB, 0x303030 }, 
 walls_colors[2] = { 0xBBA05B, 0x101010 }, text_colors[2] = { 0x101010, 0xAAAAAA };
+const size_t timer_BG_color = 0xAAAAAA, timer_time_color = 0x444444, timer_border_color = 0x666666;
 
 const std::wstring help_text = L"Здесь инфа \nОп новая строка\n0:\n1:\n2:\n3:\n4:\n5:\n6:\n7:\n8:\n9:";

@@ -35,6 +35,7 @@ public:
 
 	void paint_button(Condition& cond);
 	void paint_difficulty(Condition& cond);
+	void paint_timer(Condition& cond, int x, int y, int seconds);
 
 	void paint_field(Condition& cond);
 	void paint_playing_field(Condition& cond);

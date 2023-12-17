@@ -107,7 +107,7 @@ void choosing_difficulty(Condition& cond, int x, int y) {
 }
 
 void choosing_theme(Condition& cond, int x, int y) {
-	if (x >= field_x + 5 && x <= field_x + 5 + tools_text_width && y >= field_y + 5 && y <= field_y + 5 + tools_text_height) {
+	if (x >= field_x + 15 && x <= field_x + 15 + tools_text_width && y >= field_y + 15 && y <= field_y + 15 + tools_text_height) {
 		cond.theme_is_dark = !cond.theme_is_dark;
 		cond.init_colors();
 		cond.init_textures();

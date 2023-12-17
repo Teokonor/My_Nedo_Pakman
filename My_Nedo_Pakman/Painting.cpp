@@ -58,6 +58,22 @@ void WinApi_painter::paint_difficulty(Condition& cond) {
 		cond.Textures[TEXTURE_DIFFICULTY]);
 }
 
+void WinApi_painter::paint_timer(Condition& cond, int x, int y, int seconds) {
+	RECT border_rect = { x, y, x + icons[FUEL_TIMER][WIDTH], y + icons[FUEL_TIMER][HEIGHT] };
+	FillRect(hdc, &border_rect, CreateSolidBrush(get_color(timer_border_color)));
+	RECT timer_rect = { x + 2, y + 2, x + icons[FUEL_TIMER][WIDTH] - 2, y + icons[FUEL_TIMER][HEIGHT] - 2 };
+	FillRect(hdc, &timer_rect, CreateSolidBrush(get_color(timer_BG_color)));
+	RECT time_rect = { x + 6, y + 2, x + icons[FUEL_TIMER][WIDTH] - 6, y + icons[FUEL_TIMER][HEIGHT] - 2 };
+	int minutes = seconds / 60; seconds %= 60;
+	wchar_t time[] = L"0:00";
+	time[0] = (wchar_t)(minutes + 48); time[2] = (wchar_t)(seconds / 10 + 48); time[3] = (wchar_t)(seconds % 10 + 48);
+	HFONT my_font = CreateFontA(36, 13, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
+	SetBkMode(hdc, TRANSPARENT);
+	SetTextColor(hdc, timer_time_color);
+	SelectObject(hdc, my_font);
+	DrawTextW(hdc, time, 4, &time_rect, 0);
+}
+
 void WinApi_painter::paint_field(Condition& cond) {
 	RECT field_rect = { field_x + field_width * 5, field_y, field_x, field_y + field_height * 5 };
 	FillRect(hdc, &field_rect, CreateSolidBrush(cond.field_color));
@@ -140,7 +156,7 @@ void WinApi_painter::paint_tools_field(Condition& cond) {
 	SetBkMode(hdc, TRANSPARENT);
 	SetTextColor(hdc, cond.text_color);
 	SelectObject(hdc, my_font);
-	RECT field_rect = { field_x + 5, field_y + 5, field_x + 5 + tools_text_width, field_y + 5 + tools_text_height };
+	RECT field_rect = { field_x + 15, field_y + 15, field_x + 15 + tools_text_width, field_y + 15 + tools_text_height };
 	DrawTextW(hdc, tools_text.c_str(), -1, &field_rect, 0);
 }
 
@@ -148,7 +164,7 @@ void WinApi_painter::paint_help_field(Condition& cond) {
 	/*HFONT my_font = CreateFontA(40, 15, 0, 0, FW_MEDIUM, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS, CLIP_DEFAULT_PRECIS,
 		ANTIALIASED_QUALITY, FF_DECORATIVE, "MyFont");*/
 	HFONT my_font = CreateFontA(24, 9, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
-	RECT field_rect = { field_x + 5, field_y + 5, field_x + field_width * 5 - 5, field_y + field_height * 5 - 5 };
+	RECT field_rect = { field_x + 15, field_y + 15, field_x + field_width * 5 - 5, field_y + field_height * 5 - 5 };
 	SetBkMode(hdc, TRANSPARENT);
 	SetTextColor(hdc, cond.text_color);
 	SelectObject(hdc, my_font);
@@ -163,6 +179,8 @@ void WinApi_painter::paint_all(Condition& cond) {
 		paint_button(cond);
 	}
 	paint_difficulty(cond);
+	paint_timer(cond, icons[FUEL_TIMER][X_coord], icons[FUEL_TIMER][Y_coord], 20);
+	paint_timer(cond, icons[GAME_TIMER][X_coord], icons[GAME_TIMER][Y_coord], 120);
 	paint_field(cond);
 }
 

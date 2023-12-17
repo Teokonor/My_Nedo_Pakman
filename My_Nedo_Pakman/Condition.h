@@ -28,4 +28,4 @@ public:
 	void save_condition(const char file_name[]);
 };
 
-static COLORREF get_color(unsigned long HEX_code);
+COLORREF get_color(unsigned long HEX_code);
