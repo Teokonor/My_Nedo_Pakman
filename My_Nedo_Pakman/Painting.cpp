@@ -114,7 +114,12 @@ void WinApi_painter::paint_maps_field(Condition& cond) {
 }
 
 void WinApi_painter::paint_difficulties_field(Condition& cond) {
-
+	RECT field_rect = { field_x + field_width * 5 - 5, field_y + 5, field_x + 5, field_y + field_height * 5 - 5 };
+	FillRect(hdc, &field_rect, CreateSolidBrush(cond.BG_color));
+	for (size_t i = 0; i < 4; i++) {
+		paint_icon(field_x + difficulties_dist, field_y + difficulties_dist + (icons[DIFFICULTY][HEIGHT] + difficulties_dist) * i,
+			icons[DIFFICULTY][WIDTH], icons[DIFFICULTY][HEIGHT], difficulty_file_names[i][cond.theme_is_dark]);
+	}
 }
 
 void WinApi_painter::paint_tools_field(Condition& cond) {
