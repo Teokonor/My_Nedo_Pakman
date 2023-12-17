@@ -5,13 +5,17 @@
 class Painter {
 public:
 	void paint(Condition& cond);
+
 	virtual void paint_button(Condition& cond) = 0;
+	virtual void paint_difficulty(Condition& cond) = 0;
+
 	virtual void paint_field(Condition& cond) = 0;
 	virtual void paint_playing_field(Condition& cond) = 0;
 	virtual void paint_maps_field(Condition& cond) = 0;
 	virtual void paint_difficulties_field(Condition& cond) = 0;
 	virtual void paint_tools_field(Condition& cond) = 0;
 	virtual void paint_help_field(Condition& cond) = 0;
+
 	virtual void paint_all(Condition& cond) = 0;
 	virtual void paint_autentification_page(Condition& cond) = 0;
 };

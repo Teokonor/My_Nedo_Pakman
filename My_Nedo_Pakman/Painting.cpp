@@ -10,27 +10,18 @@ void Painter::paint(Condition& cond) {
 	switch (cond.paint)
 	{
 	case PAINT_BUTTON:
-	{
-		int pressed_button = cond.pressed_button;
 		paint_button(cond);
-		cond.pressed_button = BUTTON_PLAY;
-		paint_button(cond);
-		cond.pressed_button = pressed_button;
 		break;
-	}
 	case PAINT_FIELD:
 		paint_field(cond);
 		break;
 	case PAINT_BUTTON_AND_FIELD:
-	{
-		int pressed_button = cond.pressed_button;
 		paint_button(cond);
-		cond.pressed_button = BUTTON_PLAY;
-		paint_button(cond);
-		cond.pressed_button = pressed_button;
 		paint_field(cond);
 		break;
-	}
+	case PAINT_DIFFICULTY:
+		paint_difficulty(cond);
+		break;
 	case PAINT_ALL:
 		paint_all(cond);
 		break;
@@ -55,7 +46,11 @@ void WinApi_painter::paint_icon(int x, int y, int width, int height, std::string
 }
 
 void WinApi_painter::paint_button(Condition& cond) {
+	int pressed_button = cond.pressed_button;
 	paint_icon(buttons_coord_x[cond.pressed_button], buttons_coord_y, button_width, button_height, cond.Textures[cond.pressed_button]);
+	cond.pressed_button = BUTTON_PLAY;
+	paint_icon(buttons_coord_x[cond.pressed_button], buttons_coord_y, button_width, button_height, cond.Textures[cond.pressed_button]);
+	cond.pressed_button = pressed_button;
 }
 
 void WinApi_painter::paint_difficulty(Condition& cond) {

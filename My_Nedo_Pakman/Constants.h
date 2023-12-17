@@ -6,6 +6,7 @@
 #define PAINT_BUTTON 1
 #define PAINT_FIELD 2
 #define PAINT_BUTTON_AND_FIELD 3
+#define PAINT_DIFFICULTY 4
 #define PAINT_ALL 10
 
 //cond.pressed_button
@@ -68,8 +69,10 @@ const int icons[6][4] = { { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, { 0, 100, 0, 0 },
 //	{ { "", "" }, { "", "" } }, 
 //};
 
-const std::string difficulty_file_names[4][2] = { { "difficulty0_lite.bmp", "difficulty0_dark.bmp" }, 
-	{ "difficulty1_lite.bmp", "difficulty1_dark.bmp" }, { "difficulty2_lite.bmp", "difficulty2_dark.bmp" }, 
-	{ "difficulty3_lite.bmp", "difficulty3_dark.bmp" } };
+const std::string difficulty_file_names[4][2] = { 
+	{ "difficulty0_lite.bmp", "difficulty0_dark.bmp" }, { "difficulty1_lite.bmp", "difficulty1_dark.bmp" }, 
+	{ "difficulty2_lite.bmp", "difficulty2_dark.bmp" }, { "difficulty3_lite.bmp", "difficulty3_dark.bmp" } 
+};
+const int difficulties_dist = 10, dificulties_text_width = 200;
 
 const size_t BG_colors[2] = { /*0xFFF1CD*/0xF8EACD, 0 }, field_colors[2] = { 0xFFECBB, 0 }, walls_colors[2] = { 0xBBA05B, 0 };
