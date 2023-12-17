@@ -53,7 +53,12 @@ void field_click(Condition& cond, int x, int y) {
 }
 
 void choosing_map(Condition& cond, int x, int y) {
-	for (size_t i = 0; i < maps_quantity; i++) {
-
+	x -= (int)field_x + map0_x; y -= (int)field_y + map0_y;
+	int map_num = x / (field_width * 2 + maps_dist_x) + (y / (field_height * 2 + maps_dist_y)) * 2;
+	x %= (field_width * 2 + maps_dist_x), y %= (field_height * 2 + maps_dist_y);
+	if (map_num < maps_quantity && x >= 0 && x <= field_width * 2 && y >= 0 && y <= field_height * 2) {
+		cond.status = 20;
+		cond.walls_map.read_walls(map_file_names[map_num]);
+		cond.paint = PAINT_BUTTON_AND_FIELD;
 	}
 }

@@ -102,9 +102,7 @@ void WinApi_painter::paint_playing_field(Condition& cond) {
 
 void WinApi_painter::paint_maps_field(Condition& cond) {
 	Walls_map* old_map = new Walls_map(cond.walls_map);
-	//char file_name[] = "mapN.txt";
 	for (size_t i = 0; i < maps_quantity; i++) {
-		//file_name[3] = (char)(i + 48);
 		cond.walls_map.read_walls(map_file_names[i]);
 		paint_walls(cond, 2, field_x + map0_x + (i % 2) * (maps_dist_x + field_width * 2), 
 			field_y + map0_y + (i / 2) * (maps_dist_y + field_height * 2));
