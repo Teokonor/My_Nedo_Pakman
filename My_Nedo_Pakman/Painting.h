@@ -1,7 +1,6 @@
 #pragma once
 #include "Condition.h"
 #include <Windows.h>
-#include <vector>
 
 class Painter {
 public:

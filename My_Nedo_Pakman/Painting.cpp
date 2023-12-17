@@ -58,6 +58,11 @@ void WinApi_painter::paint_button(Condition& cond) {
 void WinApi_painter::paint_field(Condition& cond) {
 	RECT field_rect = { field_x + playing_field_width * 5, field_y, field_x, field_y + playing_field_height * 5 };
 	FillRect(hdc, &field_rect, CreateSolidBrush(cond.field_color));
+	Walls_map* old_map = new Walls_map(cond.walls_map);
+	cond.walls_map.read_walls("map_empty.txt");
+	paint_walls(cond, 5, field_x, field_y);
+	cond.walls_map = *old_map;
+	delete(old_map);
 	switch (cond.status / 10) {
 	case 2:
 		paint_playing_field(cond);
@@ -95,17 +100,16 @@ void WinApi_painter::paint_playing_field(Condition& cond) {
 }
 
 void WinApi_painter::paint_maps_field(Condition& cond) {
-	Walls_map& old_map = cond.walls_map;
-	std::vector<Walls_map> maps(maps_quantity);
+	Walls_map* old_map = new Walls_map(cond.walls_map);
 	char file_name[] = "mapN.txt";
 	for (size_t i = 0; i < maps_quantity; i++) {
 		file_name[3] = (char)(i + 48);
-		maps[i].read_walls(file_name);
-		cond.walls_map = maps[i];
-		paint_walls(cond, 2, field_x + map0_x + (i % 2) * (maps_dist_x + playing_field_width), 
-			field_y + map0_y + (i / 2) * (maps_dist_y + playing_field_height));
+		cond.walls_map.read_walls(file_name);
+		paint_walls(cond, 2, field_x + map0_x + (i % 2) * (maps_dist_x + playing_field_width * 2), 
+			field_y + map0_y + (i / 2) * (maps_dist_y + playing_field_height * 2));
 	}
-	cond.walls_map = old_map;
+	cond.walls_map = *old_map;
+	delete(old_map);
 }
 
 void WinApi_painter::paint_difficulties_field(Condition& cond) {
