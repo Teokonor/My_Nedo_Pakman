@@ -1,6 +1,6 @@
 #pragma once
 #include "Walls_map.h"
-#include <istream>
+#include <iostream>
 #include <array>
 #include <Windows.h>
 
@@ -10,7 +10,7 @@ public:
 	HWND hWnd;
 	HWND text_vidget = 0;
 	int window_height = window_start_height, window_width = window_start_width;
-	int status, map, difficulty;
+	int status = 20, map, difficulty;
 	int paint = PAINT_ALL, pressed_button = BUTTON_PLAY;
 	bool theme_is_dark, button_is_pressed = false;
 	COLORREF BG_color, field_color, walls_color;
@@ -22,6 +22,8 @@ public:
 	void init_condition(const char file_name[]);
 	Condition(Condition& other) = delete;
 	Condition& operator=(Condition& other) = delete;
+	void save_condition(std::ostream& output);
+	void save_condition(const char file_name[]);
 
 	COLORREF get_color(unsigned long HEX_code);
 };

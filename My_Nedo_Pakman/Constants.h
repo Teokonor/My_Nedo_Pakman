@@ -17,6 +17,7 @@
 #define BUTTON_HELP 4
 #define BUTTON_BACK 5
 #define BUTTON_PAUSE 6
+#define TEXTURE_DIFFICULTY 5
 
 // cond.Textures[index]
 // index

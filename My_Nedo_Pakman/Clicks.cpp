@@ -60,6 +60,7 @@ void field_click(Condition& cond, int x, int y) {
 		choosing_map(cond, x, y);
 		break;
 	case 4:
+		choosing_difficulty(cond, x, y);
 		break;
 	case 5:
 		break;
@@ -74,8 +75,24 @@ void choosing_map(Condition& cond, int x, int y) {
 	x %= (field_width * 2 + maps_dist_x), y %= (field_height * 2 + maps_dist_y);
 	if (map_num < maps_quantity && x >= 0 && x <= field_width * 2 && y >= 0 && y <= field_height * 2) {
 		cond.status = 20;
+		cond.map = map_num;
 		cond.walls_map.read_walls(map_file_names[map_num]);
 		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PLAY][cond.theme_is_dark][cond.button_is_pressed];
 		cond.paint = PAINT_BUTTON_AND_FIELD;
+	}
+}
+
+void choosing_difficulty(Condition& cond, int x, int y) {
+	x -= field_x + difficulties_dist; y -= field_y + difficulties_dist;
+	int diff_num = y / (icons[DIFFICULTY][HEIGHT] + difficulties_dist);
+	/*if (y < 0) {
+		return;
+	}*/
+	y %= icons[DIFFICULTY][HEIGHT] + difficulties_dist;
+	if (diff_num < 4 && x >= 0 && x <= icons[DIFFICULTY][WIDTH] + difficulties_dist + dificulties_text_width
+		&& y >= 0 && y <= icons[DIFFICULTY][HEIGHT]) {
+		cond.difficulty = diff_num;
+		cond.Textures[TEXTURE_DIFFICULTY] = difficulty_file_names[diff_num][cond.theme_is_dark];
+		cond.paint = PAINT_DIFFICULTY;
 	}
 }

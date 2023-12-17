@@ -55,7 +55,7 @@ void WinApi_painter::paint_button(Condition& cond) {
 
 void WinApi_painter::paint_difficulty(Condition& cond) {
 	paint_icon(icons[DIFFICULTY][X_coord], icons[DIFFICULTY][Y_coord], icons[DIFFICULTY][WIDTH], icons[DIFFICULTY][HEIGHT],
-		difficulty_file_names[cond.difficulty][cond.theme_is_dark]);
+		cond.Textures[TEXTURE_DIFFICULTY]);
 }
 
 void WinApi_painter::paint_field(Condition& cond) {
