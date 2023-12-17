@@ -46,9 +46,30 @@ void WinApi_painter::paint_button(Condition& cond) {
 }
 
 void WinApi_painter::paint_field(Condition& cond) {
+	RECT field_rect = { field_x + playing_field_width * 5, field_y, field_x, field_y + playing_field_height * 5 };
+	FillRect(hdc, &field_rect, CreateSolidBrush(cond.field_color));
+	switch (cond.status / 10) {
+	case 2:
+		paint_playing_field(cond);
+		break;
+	case 3:
+		paint_maps_field(cond);
+		break;
+	case 4:
+		paint_difficulties_field(cond);
+		break;
+	case 5:
+		paint_tools_field(cond);
+		break;
+	case 6:
+		paint_help_field(cond);
+	default:
+		break;
+	}
+}
+
+void WinApi_painter::paint_playing_field(Condition& cond) {
 	HBRUSH brush = CreateSolidBrush(cond.walls_color);
-	RECT rectangle = { field_x + playing_field_width * 5, field_y, field_x, field_y + playing_field_height * 5 };
-	FillRect(hdc, &rectangle, CreateSolidBrush(cond.field_color));
 	for (size_t y = 0; y < playing_field_height; y++) {
 		for (size_t x = 0; x < playing_field_width; x++) {
 			if (cond.walls_map.wall_at_point(x, y)) {
@@ -57,6 +78,22 @@ void WinApi_painter::paint_field(Condition& cond) {
 			}
 		}
 	}
+}
+
+void WinApi_painter::paint_maps_field(Condition& cond) {
+
+}
+
+void WinApi_painter::paint_difficulties_field(Condition& cond) {
+
+}
+
+void WinApi_painter::paint_tools_field(Condition& cond) {
+
+}
+
+void WinApi_painter::paint_help_field(Condition& cond) {
+
 }
 
 void WinApi_painter::paint_all(Condition& cond) {

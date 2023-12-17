@@ -2,7 +2,7 @@
 #include <fstream>
 
 Condition::Condition() {
-	init_condition("save_condition");
+	init_condition("save_condition.txt");
 }
 
 void Condition::init_condition(std::istream& input) {
