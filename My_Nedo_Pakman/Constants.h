@@ -58,7 +58,7 @@ const std::string button_file_names[7][2][2] = {
 #define WIDTH 2
 #define HEIGHT 3
 const int icons[6][4] = { { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, 
-	{ 600, 100, 0, 0 }, { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, };
+	{ 600, 100, 40, 40 }, { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, };
 //const std::string icons_file_names[6][2][2] = {
 //	{ { "", "" }, { "", "" } },
 //	{ { "", "" }, { "", "" } },
@@ -68,8 +68,8 @@ const int icons[6][4] = { { 0, 100, 0, 0 }, { 0, 100, 0, 0 }, { 0, 100, 0, 0 },
 //	{ { "", "" }, { "", "" } }, 
 //};
 
-const std::string difficulty_file_names[4][2] = { { "difficulty0_dark.bmp", "difficulty0_lite.bmp" }, 
-	{ "difficulty1_dark.bmp", "difficulty1_lite.bmp" }, { "difficulty2_dark.bmp", "difficulty2_lite.bmp" }, 
-	{ "difficulty3_dark.bmp", "difficulty3_lite.bmp" } };
+const std::string difficulty_file_names[4][2] = { { "difficulty0_lite.bmp", "difficulty0_dark.bmp" }, 
+	{ "difficulty1_lite.bmp", "difficulty1_dark.bmp" }, { "difficulty2_lite.bmp", "difficulty2_dark.bmp" }, 
+	{ "difficulty3_lite.bmp", "difficulty3_dark.bmp" } };
 
-const size_t BG_colors[2] = { 0xFFF1CD, 0 }, field_colors[2] = { 0xFFECBB, 0 }, walls_colors[2] = { 0xBBA05B, 0 };
+const size_t BG_colors[2] = { /*0xFFF1CD*/0xF8EACD, 0 }, field_colors[2] = { 0xFFECBB, 0 }, walls_colors[2] = { 0xBBA05B, 0 };

@@ -1,5 +1,4 @@
 #pragma once
-#include "Constants.h"
 #include "Walls_map.h"
 #include <istream>
 #include <array>

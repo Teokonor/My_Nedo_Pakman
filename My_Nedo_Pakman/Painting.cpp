@@ -58,6 +58,11 @@ void WinApi_painter::paint_button(Condition& cond) {
 	paint_icon(buttons_coord_x[cond.pressed_button], buttons_coord_y, button_width, button_height, cond.Textures[cond.pressed_button]);
 }
 
+void WinApi_painter::paint_difficulty(Condition& cond) {
+	paint_icon(icons[DIFFICULTY][X_coord], icons[DIFFICULTY][Y_coord], icons[DIFFICULTY][WIDTH], icons[DIFFICULTY][HEIGHT],
+		difficulty_file_names[cond.difficulty][cond.theme_is_dark]);
+}
+
 void WinApi_painter::paint_field(Condition& cond) {
 	RECT field_rect = { field_x + field_width * 5, field_y, field_x, field_y + field_height * 5 };
 	FillRect(hdc, &field_rect, CreateSolidBrush(cond.field_color));
@@ -128,11 +133,12 @@ void WinApi_painter::paint_help_field(Condition& cond) {
 void WinApi_painter::paint_all(Condition& cond) {
 	RECT global_rect = { cond.window_width, 0, 0, cond.window_height };
 	FillRect(hdc, &global_rect, CreateSolidBrush(cond.BG_color));
-	paint_field(cond);
 	for (int button_id = BUTTON_PLAY; button_id <= BUTTON_HELP; button_id++) {
 		cond.pressed_button = button_id;
 		paint_button(cond);
 	}
+	paint_difficulty(cond);
+	paint_field(cond);
 }
 
 void WinApi_painter::paint_autentification_page(Condition& cond) {

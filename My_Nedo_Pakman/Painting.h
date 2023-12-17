@@ -20,6 +20,7 @@ class WinApi_painter : public Painter {
 	HWND hWnd = NULL;
 	HDC hdc = NULL;
 	void paint_walls(Condition& cond, int thickness, int x0, int y0);
+	void paint_icon(int x, int y, int width, int height, std::string file_name);
 public:
 	void init_hWnd(HWND hwnd) {
 		hWnd = hwnd;
@@ -27,9 +28,9 @@ public:
 	void init_hdc(PAINTSTRUCT& ps_) {
 		hdc = ps_.hdc;
 	}
-	void paint_icon(int x, int y, int width, int height, std::string file_name);
 
 	void paint_button(Condition& cond);
+	void paint_difficulty(Condition& cond);
 
 	void paint_field(Condition& cond);
 	void paint_playing_field(Condition& cond);

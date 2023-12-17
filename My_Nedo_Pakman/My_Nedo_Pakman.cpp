@@ -1,4 +1,3 @@
-#include "Condition.h"
 #include "Clicks.h"
 #include "Painting.h"
 #include <windowsx.h>
