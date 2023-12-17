@@ -30,9 +30,10 @@ void Condition::init_colors() {
 	BG_color = get_color(BG_colors[theme_is_dark]);
 	field_color = get_color(field_colors[theme_is_dark]);
 	walls_color = get_color(walls_colors[theme_is_dark]);
+	text_color = get_color(text_colors[theme_is_dark]);
 }
 
-COLORREF Condition::get_color(unsigned long HEX_code) {
+COLORREF get_color(unsigned long HEX_code) {
 	unsigned int R = HEX_code / 0x10000, G = HEX_code % 0x10000 / 0x100, B = HEX_code % 0x100;
 	return RGB(R, G, B);
 }

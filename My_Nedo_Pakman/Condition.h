@@ -13,7 +13,7 @@ public:
 	int status = 20, map, difficulty;
 	int paint = PAINT_ALL, pressed_button = BUTTON_PLAY;
 	bool theme_is_dark, button_is_pressed = false;
-	COLORREF BG_color, field_color, walls_color;
+	COLORREF BG_color, field_color, walls_color, text_color;
 	Walls_map walls_map;
 	std::array<std::string, textures_quantity> Textures;
 
@@ -26,6 +26,6 @@ public:
 	Condition& operator=(Condition& other) = delete;
 	void save_condition(std::ostream& output);
 	void save_condition(const char file_name[]);
-
-	COLORREF get_color(unsigned long HEX_code);
 };
+
+static COLORREF get_color(unsigned long HEX_code);

@@ -29,6 +29,14 @@ void left_button_up(Condition& cond, int x, int y) {
 	if (cond.button_is_pressed) {
 		cond.button_is_pressed = false;
 		cond.Textures[cond.pressed_button] = button_file_names[cond.pressed_button][cond.theme_is_dark][cond.button_is_pressed];
+		if (cond.pressed_button == BUTTON_PLAY) {
+			if (cond.status / 10 != 2) {
+				cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
+			}
+			else if (cond.status == 25) {
+				cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PAUSE][cond.theme_is_dark][cond.button_is_pressed];
+			}
+		}
 		if (x >= buttons_coord_x[cond.pressed_button] && x <= buttons_coord_x[cond.pressed_button] + button_width
 			&& y >= buttons_coord_y && y <= buttons_coord_y + button_height) {
 			change_status_by_button_click(cond);

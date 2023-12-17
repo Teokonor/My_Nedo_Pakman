@@ -117,7 +117,7 @@ void WinApi_painter::paint_maps_field(Condition& cond) {
 void WinApi_painter::paint_difficulties_field(Condition& cond) {
 	HFONT my_font = CreateFontA(40, 15, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
 	SetBkMode(hdc, TRANSPARENT);
-	SetTextColor(hdc, RGB(0, 0, 0));
+	SetTextColor(hdc, cond.text_color);
 	SelectObject(hdc, my_font);
 	RECT field_rect = { field_x + field_width * 5 - 5, field_y + 5, field_x + 5, field_y + field_height * 5 - 5 };
 	FillRect(hdc, &field_rect, CreateSolidBrush(cond.BG_color));
@@ -138,7 +138,7 @@ void WinApi_painter::paint_difficulties_field(Condition& cond) {
 void WinApi_painter::paint_tools_field(Condition& cond) {
 	HFONT my_font = CreateFontA(40, 15, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
 	SetBkMode(hdc, TRANSPARENT);
-	SetTextColor(hdc, RGB(0, 0, 0));
+	SetTextColor(hdc, cond.text_color);
 	SelectObject(hdc, my_font);
 	RECT field_rect = { field_x + 5, field_y + 5, field_x + 5 + tools_text_width, field_y + 5 + tools_text_height };
 	DrawTextW(hdc, tools_text.c_str(), -1, &field_rect, 0);
@@ -150,7 +150,7 @@ void WinApi_painter::paint_help_field(Condition& cond) {
 	HFONT my_font = CreateFontA(24, 9, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
 	RECT field_rect = { field_x + 5, field_y + 5, field_x + field_width * 5 - 5, field_y + field_height * 5 - 5 };
 	SetBkMode(hdc, TRANSPARENT);
-	SetTextColor(hdc, RGB(0, 0, 0));
+	SetTextColor(hdc, cond.text_color);
 	SelectObject(hdc, my_font);
 	DrawTextW(hdc, help_text.c_str(), -1, &field_rect, 0);
 }
