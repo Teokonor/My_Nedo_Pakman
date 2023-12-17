@@ -1,8 +1,9 @@
 #include "Painting.h"
 
 LPCWSTR stowchar(std::string str) {
-	std::wstring wstr = std::wstring(str.begin(), str.end());
-	return wstr.c_str();
+	std::wstring* wstr = new std::wstring;
+	*wstr = std::wstring(str.begin(), str.end());
+	return wstr->c_str();
 }
 
 void Painter::paint(Condition& cond) {
@@ -56,7 +57,7 @@ void WinApi_painter::paint_button(Condition& cond) {
 }
 
 void WinApi_painter::paint_field(Condition& cond) {
-	RECT field_rect = { field_x + playing_field_width * 5, field_y, field_x, field_y + playing_field_height * 5 };
+	RECT field_rect = { field_x + field_width * 5, field_y, field_x, field_y + field_height * 5 };
 	FillRect(hdc, &field_rect, CreateSolidBrush(cond.field_color));
 	Walls_map* old_map = new Walls_map(cond.walls_map);
 	cond.walls_map.read_walls("map_empty.txt");
@@ -85,8 +86,8 @@ void WinApi_painter::paint_field(Condition& cond) {
 
 void WinApi_painter::paint_walls(Condition& cond, int thickness, int x0, int y0) {
 	HBRUSH brush = CreateSolidBrush(cond.walls_color);
-	for (size_t y = 0; y < playing_field_height; y++) {
-		for (size_t x = 0; x < playing_field_width; x++) {
+	for (size_t y = 0; y < field_height; y++) {
+		for (size_t x = 0; x < field_width; x++) {
 			if (cond.walls_map.wall_at_point(x, y)) {
 				RECT rect = { x0 + (x + 1) * thickness, y0 + y * thickness, x0 + x * thickness, y0 + (y + 1) * thickness };
 				FillRect(hdc, &rect, brush);
@@ -101,12 +102,12 @@ void WinApi_painter::paint_playing_field(Condition& cond) {
 
 void WinApi_painter::paint_maps_field(Condition& cond) {
 	Walls_map* old_map = new Walls_map(cond.walls_map);
-	char file_name[] = "mapN.txt";
+	//char file_name[] = "mapN.txt";
 	for (size_t i = 0; i < maps_quantity; i++) {
-		file_name[3] = (char)(i + 48);
-		cond.walls_map.read_walls(file_name);
-		paint_walls(cond, 2, field_x + map0_x + (i % 2) * (maps_dist_x + playing_field_width * 2), 
-			field_y + map0_y + (i / 2) * (maps_dist_y + playing_field_height * 2));
+		//file_name[3] = (char)(i + 48);
+		cond.walls_map.read_walls(map_file_names[i]);
+		paint_walls(cond, 2, field_x + map0_x + (i % 2) * (maps_dist_x + field_width * 2), 
+			field_y + map0_y + (i / 2) * (maps_dist_y + field_height * 2));
 	}
 	cond.walls_map = *old_map;
 	delete(old_map);

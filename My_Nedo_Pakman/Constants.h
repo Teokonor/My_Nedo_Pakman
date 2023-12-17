@@ -26,12 +26,13 @@ const size_t textures_quantity = 7;
 
 const size_t maps_quantity = 3;
 const int map0_x = 61, map0_y = 33, maps_dist_x = 63, maps_dist_y = 35;
+const std::string map_file_names[maps_quantity] = { "map0.txt", "map1.txt", "map2.txt" };
 
 const int window_start_x = 300, window_start_y = 100, window_start_width = 1005 + 18, window_start_height = 705 + 38;
 
 const int field_x = 40, field_y = 160;
 
-const size_t playing_field_height = 101, playing_field_width = 185;
+const size_t field_height = 101, field_width = 185;
 
 const int button_width = 60, button_height = 60, buttons_coord_y = 20,
 buttons_coord_x[5] = { 1005 / 2 - 30, 20, 100, 1005 - 160, 1005 - 80 };
