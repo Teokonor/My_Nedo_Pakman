@@ -12,7 +12,7 @@ void Condition::init_condition(std::istream& input) {
 	field_color = get_color(field_colors[theme_is_dark]);
 	walls_color = get_color(walls_colors[theme_is_dark]);
 	Textures.fill("");
-	for (size_t button_num = 0; button_num < BUTTON_HELP; button_num++) {
+	for (size_t button_num = 0; button_num <= BUTTON_HELP; button_num++) {
 		Textures[button_num] = button_file_names[button_num][theme_is_dark][button_is_pressed];
 	}
 }
