@@ -8,6 +8,7 @@ class Condition {
 public:
 	WNDCLASS window_class;
 	HWND hWnd;
+	HWND text_vidget = 0;
 	int window_height = window_start_height, window_width = window_start_width;
 	int status, map, difficulty;
 	int paint = PAINT_ALL, pressed_button = BUTTON_PLAY;

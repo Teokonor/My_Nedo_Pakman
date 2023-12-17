@@ -73,6 +73,9 @@ const std::string difficulty_file_names[4][2] = {
 	{ "difficulty0_lite.bmp", "difficulty0_dark.bmp" }, { "difficulty1_lite.bmp", "difficulty1_dark.bmp" }, 
 	{ "difficulty2_lite.bmp", "difficulty2_dark.bmp" }, { "difficulty3_lite.bmp", "difficulty3_dark.bmp" } 
 };
-const int difficulties_dist = 10, dificulties_text_width = 200;
+const int difficulties_dist = 10, dificulties_text_width = 140;
+const std::wstring difficulties_names [4] = { L"лёгкая", L"средняя", L"сложная", L"молния" };
 
 const size_t BG_colors[2] = { /*0xFFF1CD*/0xF8EACD, 0 }, field_colors[2] = { 0xFFECBB, 0 }, walls_colors[2] = { 0xBBA05B, 0 };
+
+const std::wstring help_text = L"Здесь инфа \nОп новая строка\n0:\n1:\n2:\n3:\n4:\n5:\n6:\n7:\n8:\n9:";

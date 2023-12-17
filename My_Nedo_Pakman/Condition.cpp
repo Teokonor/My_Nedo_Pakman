@@ -15,8 +15,6 @@ void Condition::init_condition(std::istream& input) {
 	for (size_t button_num = 0; button_num < BUTTON_HELP; button_num++) {
 		Textures[button_num] = button_file_names[button_num][theme_is_dark][button_is_pressed];
 	}
-	Textures = { "button_play_lite_up.bmp", "button_maps_lite_up.bmp", "button_difficulty_lite_up.bmp", "button_tools_lite_up.bmp", 
-		"button_help_lite_up.bmp", "", "" };
 }
 
 void Condition::init_condition(const char file_name[]) {

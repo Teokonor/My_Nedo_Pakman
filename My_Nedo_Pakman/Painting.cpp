@@ -81,6 +81,7 @@ void WinApi_painter::paint_field(Condition& cond) {
 		break;
 	case 6:
 		paint_help_field(cond);
+		break;
 	default:
 		break;
 	}
@@ -114,12 +115,24 @@ void WinApi_painter::paint_maps_field(Condition& cond) {
 }
 
 void WinApi_painter::paint_difficulties_field(Condition& cond) {
+	HFONT my_font = CreateFontA(40, 15, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
+	SetBkMode(hdc, TRANSPARENT);
+	SetTextColor(hdc, RGB(0, 0, 0));
+	SelectObject(hdc, my_font);
 	RECT field_rect = { field_x + field_width * 5 - 5, field_y + 5, field_x + 5, field_y + field_height * 5 - 5 };
 	FillRect(hdc, &field_rect, CreateSolidBrush(cond.BG_color));
 	for (size_t i = 0; i < 4; i++) {
 		paint_icon(field_x + difficulties_dist, field_y + difficulties_dist + (icons[DIFFICULTY][HEIGHT] + difficulties_dist) * i,
 			icons[DIFFICULTY][WIDTH], icons[DIFFICULTY][HEIGHT], difficulty_file_names[i][cond.theme_is_dark]);
+		RECT text_rect = { 
+			field_x + difficulties_dist * 2 + icons[DIFFICULTY][WIDTH],
+			field_y + difficulties_dist + (icons[DIFFICULTY][HEIGHT] + difficulties_dist) * i, 
+			field_x + difficulties_dist * 2 + icons[DIFFICULTY][WIDTH] + dificulties_text_width, 
+			field_y + (icons[DIFFICULTY][HEIGHT] + difficulties_dist) * (i + 1) 
+		};
+		DrawTextW(hdc, difficulties_names[i].c_str(), -1, &text_rect, 0);
 	}
+
 }
 
 void WinApi_painter::paint_tools_field(Condition& cond) {
@@ -127,7 +140,14 @@ void WinApi_painter::paint_tools_field(Condition& cond) {
 }
 
 void WinApi_painter::paint_help_field(Condition& cond) {
-
+	/*HFONT my_font = CreateFontA(40, 15, 0, 0, FW_MEDIUM, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS, CLIP_DEFAULT_PRECIS,
+		ANTIALIASED_QUALITY, FF_DECORATIVE, "MyFont");*/
+	HFONT my_font = CreateFontA(24, 9, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
+	RECT field_rect = { field_x + 5, field_y + 5, field_x + field_width * 5 - 5, field_y + field_height * 5 - 5 };
+	SetBkMode(hdc, TRANSPARENT);
+	SetTextColor(hdc, RGB(0, 0, 0));
+	SelectObject(hdc, my_font);
+	DrawTextW(hdc, help_text.c_str(), -1, &field_rect, 0);
 }
 
 void WinApi_painter::paint_all(Condition& cond) {
