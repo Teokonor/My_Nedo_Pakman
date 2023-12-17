@@ -124,6 +124,8 @@ void WinApi_painter::paint_help_field(Condition& cond) {
 }
 
 void WinApi_painter::paint_all(Condition& cond) {
+	RECT global_rect = { cond.window_width, 0, 0, cond.window_height };
+	FillRect(hdc, &global_rect, CreateSolidBrush(cond.BG_color));
 	paint_field(cond);
 	for (int button_id = BUTTON_PLAY; button_id <= BUTTON_HELP; button_id++) {
 		cond.pressed_button = button_id;

@@ -7,8 +7,10 @@
 
 class Condition {
 public:
+	WNDCLASS window_class;
 	HWND hWnd;
-	size_t status, map, difficulty;
+	int window_height = window_start_height, window_width = window_start_width;
+	int status, map, difficulty;
 	int paint = PAINT_ALL, pressed_button = BUTTON_PLAY;
 	bool theme_is_dark, button_is_pressed = false;
 	COLORREF BG_color, field_color, walls_color;

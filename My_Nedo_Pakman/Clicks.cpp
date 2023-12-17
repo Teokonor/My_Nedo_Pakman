@@ -8,6 +8,14 @@ void left_button_down(Condition& cond, int x, int y) {
 				cond.button_is_pressed = true;
 				cond.paint = PAINT_BUTTON;
 				cond.Textures[button_id] = button_file_names[button_id][cond.theme_is_dark][cond.button_is_pressed];
+				if (button_id == BUTTON_PLAY) {
+					if (cond.status / 10 != 2) {
+						cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
+					}
+					else if (cond.status == 25) {
+						cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PAUSE][cond.theme_is_dark][cond.button_is_pressed];
+					}
+				}
 				break;
 			}
 		}
@@ -32,8 +40,16 @@ void left_button_up(Condition& cond, int x, int y) {
 }
 
 void change_status_by_button_click(Condition& cond) {
-	if (cond.pressed_button == BUTTON_MAPS) {
-		cond.status = 30;
+	if (cond.status / 10 - 2 == cond.pressed_button && cond.pressed_button != BUTTON_PLAY
+		|| cond.status / 10 != 2 && cond.pressed_button == BUTTON_PLAY) {
+		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PLAY][cond.theme_is_dark][cond.button_is_pressed];
+		cond.status = 20;
+		cond.paint = PAINT_BUTTON_AND_FIELD;
+		return;
+	}
+	if (cond.pressed_button != BUTTON_PLAY) {
+		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
+		cond.status = (cond.pressed_button + 2) * 10;
 		cond.paint = PAINT_BUTTON_AND_FIELD;
 	}
 }
@@ -59,6 +75,7 @@ void choosing_map(Condition& cond, int x, int y) {
 	if (map_num < maps_quantity && x >= 0 && x <= field_width * 2 && y >= 0 && y <= field_height * 2) {
 		cond.status = 20;
 		cond.walls_map.read_walls(map_file_names[map_num]);
+		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PLAY][cond.theme_is_dark][cond.button_is_pressed];
 		cond.paint = PAINT_BUTTON_AND_FIELD;
 	}
 }

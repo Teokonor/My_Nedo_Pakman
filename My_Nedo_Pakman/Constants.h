@@ -14,6 +14,8 @@
 #define BUTTON_DIFFICULTY 2
 #define BUTTON_TOOLS 3
 #define BUTTON_HELP 4
+#define BUTTON_BACK 5
+#define BUTTON_PAUSE 6
 
 // cond.Textures[index]
 // index
@@ -35,7 +37,7 @@ const int field_x = 40, field_y = 160;
 const size_t field_height = 101, field_width = 185;
 
 const int button_width = 60, button_height = 60, buttons_coord_y = 20,
-buttons_coord_x[5] = { 1005 / 2 - 30, 20, 100, 1005 - 160, 1005 - 80 };
+buttons_coord_x[] = { 1005 / 2 - 30, 20, 100, 1005 - 160, 1005 - 80 };
 
 const std::string button_file_names[7][2][2] = { 
 	{ { "button_play_lite_up.bmp", "button_play_lite_down.bmp" }, { "button_play_dark_up.bmp", "button_play_dark_down.bmp" } },

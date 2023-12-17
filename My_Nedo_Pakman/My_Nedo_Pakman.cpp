@@ -13,10 +13,10 @@ WinApi_painter painter;
 //Пока оставлю это здесь для себя:            MessageBoxA(hWnd, "Hey Hey!!", "Paint opened", MB_OK);
 
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdshow) {
-	WNDCLASS main_wind = { 0 };
-	InitWndClass(main_wind, (HBRUSH)COLOR_WINDOW, LoadCursor(NULL, IDC_ARROW), hInst, LoadIcon(NULL, IDI_QUESTION),
+	cond.window_class = { 0 };
+	InitWndClass(cond.window_class, (HBRUSH)COLOR_WINDOW, LoadCursor(NULL, IDC_ARROW), hInst, LoadIcon(NULL, IDI_QUESTION),
 		L"MainWndClass", Procedure);
-	if (!RegisterClassW(&main_wind)) {
+	if (!RegisterClassW(&cond.window_class)) {
 		return -1;
 	}
 	cond.hWnd = CreateWindowExW(0, L"MainWndClass", L"My Nedo Pakman", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 
