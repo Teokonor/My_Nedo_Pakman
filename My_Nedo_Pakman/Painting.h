@@ -1,10 +1,11 @@
 #pragma once
 #include "Condition.h"
 #include <Windows.h>
+#include <vector>
 
 class Painter {
 public:
-	virtual void paint(Condition& cond);
+	void paint(Condition& cond);
 	virtual void paint_button(Condition& cond) = 0;
 	virtual void paint_field(Condition& cond) = 0;
 	virtual void paint_playing_field(Condition& cond) = 0;
@@ -19,6 +20,7 @@ public:
 class WinApi_painter : public Painter {
 	HWND hWnd = NULL;
 	HDC hdc = NULL;
+	void paint_walls(Condition& cond, int thickness, int x0, int y0);
 public:
 	void init_hWnd(HWND hwnd) {
 		hWnd = hwnd;
@@ -26,7 +28,6 @@ public:
 	void init_hdc(PAINTSTRUCT& ps_) {
 		hdc = ps_.hdc;
 	}
-	//void paint(Condition& cond);
 	void paint_button(Condition& cond);
 	void paint_field(Condition& cond);
 	void paint_playing_field(Condition& cond);

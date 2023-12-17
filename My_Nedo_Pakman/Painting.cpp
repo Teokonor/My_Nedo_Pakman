@@ -20,6 +20,16 @@ void Painter::paint(Condition& cond) {
 	case PAINT_FIELD:
 		paint_field(cond);
 		break;
+	case PAINT_BUTTON_AND_FIELD:
+	{
+		int pressed_button = cond.pressed_button;
+		paint_button(cond);
+		cond.pressed_button = BUTTON_PLAY;
+		paint_button(cond);
+		cond.pressed_button = pressed_button;
+		paint_field(cond);
+		break;
+	}
 	case PAINT_ALL:
 		paint_all(cond);
 		break;
@@ -68,20 +78,34 @@ void WinApi_painter::paint_field(Condition& cond) {
 	}
 }
 
-void WinApi_painter::paint_playing_field(Condition& cond) {
+void WinApi_painter::paint_walls(Condition& cond, int thickness, int x0, int y0) {
 	HBRUSH brush = CreateSolidBrush(cond.walls_color);
 	for (size_t y = 0; y < playing_field_height; y++) {
 		for (size_t x = 0; x < playing_field_width; x++) {
 			if (cond.walls_map.wall_at_point(x, y)) {
-				RECT rect = { field_x + (x + 1) * 5, field_y + y * 5, field_x + x * 5, field_y + (y + 1) * 5 };
+				RECT rect = { x0 + (x + 1) * thickness, y0 + y * thickness, x0 + x * thickness, y0 + (y + 1) * thickness };
 				FillRect(hdc, &rect, brush);
 			}
 		}
 	}
 }
 
-void WinApi_painter::paint_maps_field(Condition& cond) {
+void WinApi_painter::paint_playing_field(Condition& cond) {
+	paint_walls(cond, 5, field_x, field_y);
+}
 
+void WinApi_painter::paint_maps_field(Condition& cond) {
+	Walls_map& old_map = cond.walls_map;
+	std::vector<Walls_map> maps(maps_quantity);
+	char file_name[] = "mapN.txt";
+	for (size_t i = 0; i < maps_quantity; i++) {
+		file_name[3] = (char)(i + 48);
+		maps[i].read_walls(file_name);
+		cond.walls_map = maps[i];
+		paint_walls(cond, 2, field_x + map0_x + (i % 2) * (maps_dist_x + playing_field_width), 
+			field_y + map0_y + (i / 2) * (maps_dist_y + playing_field_height));
+	}
+	cond.walls_map = old_map;
 }
 
 void WinApi_painter::paint_difficulties_field(Condition& cond) {

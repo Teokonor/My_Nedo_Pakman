@@ -5,6 +5,7 @@
 #define NOT_PAINT 0
 #define PAINT_BUTTON 1
 #define PAINT_FIELD 2
+#define PAINT_BUTTON_AND_FIELD 3
 #define PAINT_ALL 10
 
 //cond.pressed_button
@@ -17,11 +18,14 @@
 // cond.Textures[index]
 // index
 const size_t textures_quantity = 7;
-#define TEXTURE_BUTTON_PLAY 2
-#define TEXTURE_BUTTON_MAPS 3
-#define TEXTURE_BUTTON_DIFFICULTY 4
-#define TEXTURE_BUTTON_TOOLS 5
-#define TEXTURE_BUTTON_HELP 6
+//#define TEXTURE_BUTTON_PLAY 2
+//#define TEXTURE_BUTTON_MAPS 3
+//#define TEXTURE_BUTTON_DIFFICULTY 4
+//#define TEXTURE_BUTTON_TOOLS 5
+//#define TEXTURE_BUTTON_HELP 6
+
+const size_t maps_quantity = 3;
+const int map0_x = 61, map0_y = 33, maps_dist_x = 63, maps_dist_y = 35;
 
 const int window_start_x = 300, window_start_y = 100, window_start_width = 1005 + 18, window_start_height = 705 + 38;
 

@@ -20,11 +20,17 @@ void left_button_up(Condition& cond, int x, int y) {
 		cond.Textures[cond.pressed_button] = button_file_names[cond.pressed_button][cond.theme_is_dark][cond.button_is_pressed];
 		if (x >= buttons_coord_x[cond.pressed_button] && x <= buttons_coord_x[cond.pressed_button] + button_width
 			&& y >= buttons_coord_y && y <= buttons_coord_y + button_height) {
-			// Здесь произошёл факт нажатия, а значит должно было измениться состояние
-			cond.paint = PAINT_BUTTON;
+			change_status_by_button_click(cond);
 		}
 		else {
 			cond.paint = PAINT_BUTTON;
 		}
+	}
+}
+
+void change_status_by_button_click(Condition& cond) {
+	if (cond.pressed_button == BUTTON_MAPS) {
+		cond.status = 30;
+		cond.paint = PAINT_BUTTON_AND_FIELD;
 	}
 }
