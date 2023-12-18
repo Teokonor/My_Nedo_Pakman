@@ -60,7 +60,7 @@ const std::string button_file_names[7][2][2] = {
 #define WIDTH 2
 #define HEIGHT 3
 const int icons[6][4] = { { 40, 100, 72, 40 }, { 132, 102, 40, 36 }, { 1005 / 2 - 36, 100, 72, 40 }, 
-	{ 600, 100, 40, 40 }, { 0, 100, 0, 40 }, { 1005 - 40 - 40, 102, 40, 36 } };
+	{ 705 - 20 - 40, 100, 40, 40 }, { 925 - 20 - 40 * 5, 100, 200, 40 }, { 1005 - 40 - 40, 102, 40, 36 } };
 //const std::string icons_file_names[6][2][2] = {
 //	{ { "", "" }, { "", "" } },
 //	{ { "", "" }, { "", "" } },
@@ -84,5 +84,8 @@ const size_t BG_colors[2] = { /*0xFFF1CD*/0xF8EACD, 0x202020 }, field_colors[2] 
 walls_colors[2] = { 0xBBA05B, 0x101010 }, text_colors[2] = { 0x101010, 0xAAAAAA };
 const size_t timer_BG_color = 0xAAAAAA, timer_time_color = 0x444444, timer_border_color = 0x666666;
 const size_t score_color[2] = { 0x057D9F, 0x39AECF };
+
+const std::string star_file_names[2][2] = { { "star_lite_passive.bmp", "star_lite_active.bmp" },
+	{ "star_dark_passive.bmp", "star_dark_active.bmp" } };
 
 const std::wstring help_text = L"Здесь инфа \nОп новая строка\n0:\n1:\n2:\n3:\n4:\n5:\n6:\n7:\n8:\n9:";

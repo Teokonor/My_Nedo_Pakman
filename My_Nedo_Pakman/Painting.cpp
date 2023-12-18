@@ -68,6 +68,7 @@ void WinApi_painter::paint_difficulty(Condition& cond) {
 	paint_icon(icons[DIFFICULTY][X_coord], icons[DIFFICULTY][Y_coord], icons[DIFFICULTY][WIDTH], icons[DIFFICULTY][HEIGHT],
 		cond.Textures[TEXTURE_DIFFICULTY]);
 	paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
+	paint_stars(cond);
 }
 
 void WinApi_painter::paint_timer(Condition& cond, int x, int y, int seconds) {
@@ -88,6 +89,19 @@ void WinApi_painter::paint_score(Condition& cond, int x, int y, int score_) {
 	wchar_t text_score[] = L"00";
 	text_score[0] = (wchar_t)(score_ / 10 + 48); text_score[1] = (wchar_t)(score_ % 10 + 48);
 	paint_text(score_rect, 36, 13, get_color(score_color[cond.theme_is_dark]), text_score);
+}
+
+void WinApi_painter::paint_stars(Condition& cond) {
+	RECT stars_rect = { icons[STARS][X_coord], icons[STARS][Y_coord], 
+		icons[STARS][X_coord] + icons[STARS][WIDTH], icons[STARS][Y_coord] + icons[STARS][HEIGHT] };
+	FillRect(hdc, &stars_rect, CreateSolidBrush(cond.BG_color));
+	int x = icons[STARS][X_coord] + icons[STARS][HEIGHT] * 4; 
+	short score = cond.scores[cond.map][cond.difficulty];
+	for (short score_to_star = 10; score_to_star <= 50; score_to_star += 10) {
+		paint_icon(x, icons[STARS][Y_coord], icons[STARS][HEIGHT], icons[STARS][HEIGHT], 
+			star_file_names[cond.theme_is_dark][score / score_to_star != 0]);
+		x -= icons[STARS][HEIGHT];
+	}
 }
 
 void WinApi_painter::paint_field(Condition& cond) {
@@ -134,6 +148,7 @@ void WinApi_painter::paint_walls(Condition& cond, int thickness, int x0, int y0)
 void WinApi_painter::paint_playing_field(Condition& cond) {
 	paint_walls(cond, 5, field_x, field_y);
 	paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
+	paint_stars(cond);
 }
 
 void WinApi_painter::paint_maps_field(Condition& cond) {
@@ -161,7 +176,6 @@ void WinApi_painter::paint_difficulties_field(Condition& cond) {
 		};
 		paint_text(text_rect, 40, 15, cond.text_color, difficulties_names[i].c_str());
 	}
-
 }
 
 void WinApi_painter::paint_tools_field(Condition& cond) {
@@ -183,9 +197,10 @@ void WinApi_painter::paint_all(Condition& cond) {
 	}
 	paint_difficulty(cond);
 	paint_timer(cond, icons[FUEL_TIMER][X_coord], icons[FUEL_TIMER][Y_coord], 20);
-	paint_timer(cond, icons[GAME_TIMER][X_coord], icons[GAME_TIMER][Y_coord], 120);
 	paint_score(cond, icons[SCORE_COUNTER][X_coord], icons[SCORE_COUNTER][Y_coord], 0);
+	paint_timer(cond, icons[GAME_TIMER][X_coord], icons[GAME_TIMER][Y_coord], 120);
 	paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
+	paint_stars(cond);
 	paint_field(cond);
 }
 
