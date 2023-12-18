@@ -67,6 +67,7 @@ void WinApi_painter::paint_button(Condition& cond) {
 void WinApi_painter::paint_difficulty(Condition& cond) {
 	paint_icon(icons[DIFFICULTY][X_coord], icons[DIFFICULTY][Y_coord], icons[DIFFICULTY][WIDTH], icons[DIFFICULTY][HEIGHT],
 		cond.Textures[TEXTURE_DIFFICULTY]);
+	paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
 }
 
 void WinApi_painter::paint_timer(Condition& cond, int x, int y, int seconds) {
@@ -79,13 +80,14 @@ void WinApi_painter::paint_timer(Condition& cond, int x, int y, int seconds) {
 	wchar_t time[] = L"0:00";
 	time[0] = (wchar_t)(minutes + 48); time[2] = (wchar_t)(seconds / 10 + 48); time[3] = (wchar_t)(seconds % 10 + 48);
 	paint_text(time_rect, 36, 13, get_color(timer_time_color), time);
+}
 
-
-	/*HFONT my_font = CreateFontA(36, 13, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
-	SetBkMode(hdc, TRANSPARENT);
-	SetTextColor(hdc, timer_time_color);
-	SelectObject(hdc, my_font);
-	DrawTextW(hdc, time, 4, &time_rect, 0);*/
+void WinApi_painter::paint_score(Condition& cond, int x, int y, int score_) {
+	RECT score_rect = { x, y, x + icons[SCORE_COUNTER][WIDTH], y + icons[SCORE_COUNTER][HEIGHT]};
+	FillRect(hdc, &score_rect, CreateSolidBrush(cond.BG_color));
+	wchar_t text_score[] = L"00";
+	text_score[0] = (wchar_t)(score_ / 10 + 48); text_score[1] = (wchar_t)(score_ % 10 + 48);
+	paint_text(score_rect, 36, 13, get_color(score_color[cond.theme_is_dark]), text_score);
 }
 
 void WinApi_painter::paint_field(Condition& cond) {
@@ -131,6 +133,7 @@ void WinApi_painter::paint_walls(Condition& cond, int thickness, int x0, int y0)
 
 void WinApi_painter::paint_playing_field(Condition& cond) {
 	paint_walls(cond, 5, field_x, field_y);
+	paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
 }
 
 void WinApi_painter::paint_maps_field(Condition& cond) {
@@ -145,10 +148,6 @@ void WinApi_painter::paint_maps_field(Condition& cond) {
 }
 
 void WinApi_painter::paint_difficulties_field(Condition& cond) {
-	/*HFONT my_font = CreateFontA(40, 15, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
-	SetBkMode(hdc, TRANSPARENT);
-	SetTextColor(hdc, cond.text_color);
-	SelectObject(hdc, my_font);*/
 	RECT field_rect = { field_x + field_width * 5 - 5, field_y + 5, field_x + 5, field_y + field_height * 5 - 5 };
 	FillRect(hdc, &field_rect, CreateSolidBrush(cond.BG_color));
 	for (size_t i = 0; i < 4; i++) {
@@ -161,30 +160,17 @@ void WinApi_painter::paint_difficulties_field(Condition& cond) {
 			field_y + (icons[DIFFICULTY][HEIGHT] + difficulties_dist) * (i + 1) 
 		};
 		paint_text(text_rect, 40, 15, cond.text_color, difficulties_names[i].c_str());
-
-
-		//DrawTextW(hdc, difficulties_names[i].c_str(), -1, &text_rect, 0);
 	}
 
 }
 
 void WinApi_painter::paint_tools_field(Condition& cond) {
-	/*HFONT my_font = CreateFontA(40, 15, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
-	SetBkMode(hdc, TRANSPARENT);
-	SetTextColor(hdc, cond.text_color);
-	SelectObject(hdc, my_font);*/
 	RECT field_rect = { field_x + 15, field_y + 15, field_x + 15 + tools_text_width, field_y + 15 + tools_text_height };
-	//DrawTextW(hdc, tools_text.c_str(), -1, &field_rect, 0);
 	paint_text(field_rect, 40, 15, cond.text_color, tools_text.c_str());
 }
 
 void WinApi_painter::paint_help_field(Condition& cond) {
-	//HFONT my_font = CreateFontA(24, 9, 0, 0, 551, 0, 0, 0, DEFAULT_CHARSET, 0, 0, ANTIALIASED_QUALITY, FF_DONTCARE, "MyFont");
 	RECT field_rect = { field_x + 15, field_y + 15, field_x + field_width * 5 - 5, field_y + field_height * 5 - 5 };
-	//SetBkMode(hdc, TRANSPARENT);
-	//SetTextColor(hdc, cond.text_color);
-	//SelectObject(hdc, my_font);
-	//DrawTextW(hdc, help_text.c_str(), -1, &field_rect, 0);
 	paint_text(field_rect, 24, 9, cond.text_color, help_text.c_str());
 }
 
@@ -198,6 +184,8 @@ void WinApi_painter::paint_all(Condition& cond) {
 	paint_difficulty(cond);
 	paint_timer(cond, icons[FUEL_TIMER][X_coord], icons[FUEL_TIMER][Y_coord], 20);
 	paint_timer(cond, icons[GAME_TIMER][X_coord], icons[GAME_TIMER][Y_coord], 120);
+	paint_score(cond, icons[SCORE_COUNTER][X_coord], icons[SCORE_COUNTER][Y_coord], 0);
+	paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
 	paint_field(cond);
 }
 

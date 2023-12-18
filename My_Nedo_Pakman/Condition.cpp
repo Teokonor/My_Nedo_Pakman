@@ -7,6 +7,11 @@ Condition::Condition() {
 
 void Condition::init_condition(std::istream& input) {
 	input >> map >> difficulty >> theme_is_dark;
+	for (size_t cur_map = 0; cur_map < maps_quantity; cur_map++) {
+		for (size_t cur_diff = 0; cur_diff < 4; cur_diff++) {
+			input >> scores[cur_map][cur_diff];
+		}
+	}
 	walls_map.read_walls(map_file_names[map]);
 	init_colors();
 	Textures.fill("");
@@ -39,7 +44,13 @@ COLORREF get_color(unsigned long HEX_code) {
 }
 
 void Condition::save_condition(std::ostream& output) {
-	output << map << ' ' << difficulty << ' ' << theme_is_dark;
+	output << map << ' ' << difficulty << ' ' << theme_is_dark << '\n';
+	for (size_t cur_map = 0; cur_map < maps_quantity; cur_map++) {
+		for (size_t cur_diff = 0; cur_diff < 4; cur_diff++) {
+			output << scores[cur_map][cur_diff] << ' ';
+		}
+		output << '\n';
+	}
 }
 
 void Condition::save_condition(const char file_name[]) {

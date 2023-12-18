@@ -16,6 +16,8 @@ public:
 	COLORREF BG_color, field_color, walls_color, text_color;
 	Walls_map walls_map;
 	std::array<std::string, textures_quantity> Textures;
+	std::array<std::array<short, 4>, maps_quantity> scores;
+	short score = 0;
 
 	Condition();
 	void init_condition(std::istream& input);
