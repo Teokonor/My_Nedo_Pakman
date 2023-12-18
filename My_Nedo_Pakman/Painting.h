@@ -25,6 +25,7 @@ class WinApi_painter : public Painter {
 	HDC hdc = NULL;
 	void paint_walls(Condition& cond, int thickness, int x0, int y0);
 	void paint_icon(int x, int y, int width, int height, std::string file_name);
+	void paint_text(RECT rect, int letter_height, int letter_width, COLORREF color, LPCWSTR text);
 public:
 	void init_hWnd(HWND hwnd) {
 		hWnd = hwnd;
