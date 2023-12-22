@@ -60,6 +60,12 @@ void change_status_by_button_click(Condition& cond) {
 		cond.status = (cond.pressed_button + 2) * 10;
 		cond.paint = PAINT_BUTTON_AND_FIELD;
 	}
+	if (cond.status == 20 && cond.pressed_button == BUTTON_PLAY) {
+		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PAUSE][cond.theme_is_dark][cond.button_is_pressed];
+		cond.status = 21;
+		cond.start_game();
+		cond.paint = PAINT_BUTTON;
+	}
 }
 
 void field_click(Condition& cond, int x, int y) {
@@ -101,6 +107,7 @@ void choosing_difficulty(Condition& cond, int x, int y) {
 	if (diff_num < 4 && x >= 0 && x <= icons[DIFFICULTY][WIDTH] + difficulties_dist + dificulties_text_width
 		&& y >= 0 && y <= icons[DIFFICULTY][HEIGHT]) {
 		cond.difficulty = diff_num;
+		cond.init_difficulties();
 		cond.Textures[TEXTURE_DIFFICULTY] = difficulty_file_names[diff_num][cond.theme_is_dark];
 		cond.paint = PAINT_DIFFICULTY;
 	}

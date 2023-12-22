@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Clicks.cpp" />
     <ClCompile Include="Condition.cpp" />
+    <ClCompile Include="Game_logic.cpp" />
     <ClCompile Include="Painting.cpp" />
     <ClCompile Include="My_Nedo_Pakman.cpp" />
     <ClCompile Include="Walls_map.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Clicks.h" />
     <ClInclude Include="Condition.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Game_logic.h" />
     <ClInclude Include="Painting.h" />
     <ClInclude Include="Walls_map.h" />
   </ItemGroup>

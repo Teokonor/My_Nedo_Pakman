@@ -11,6 +11,7 @@ public:
 	virtual void paint_timer(Condition& cond, int x, int y, int seconds) = 0;
 	virtual void paint_score(Condition& cond, int x, int y, int score_) = 0;
 	virtual void paint_stars(Condition& cond) = 0;
+	virtual void paint_game_elems(Condition& cond) = 0;
 
 	virtual void paint_field(Condition& cond) = 0;
 	virtual void paint_playing_field(Condition& cond) = 0;
@@ -42,6 +43,7 @@ public:
 	void paint_timer(Condition& cond, int x, int y, int seconds);
 	void paint_score(Condition& cond, int x, int y, int score_);
 	void paint_stars(Condition& cond);
+	void paint_game_elems(Condition& cond);
 
 	void paint_field(Condition& cond);
 	void paint_playing_field(Condition& cond);

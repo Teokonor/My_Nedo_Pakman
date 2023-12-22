@@ -25,7 +25,9 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	painter.init_hWnd(cond.hWnd);
 	
 	MSG main_msg;
-	while (GetMessage(&main_msg, NULL, NULL, NULL)) {
+	while (cond.active) {
+		cond.process_game();
+		GetMessageW(&main_msg, NULL, NULL, NULL);
 		TranslateMessage(&main_msg);
 		DispatchMessageW(&main_msg);
 	}
@@ -43,6 +45,7 @@ LRESULT CALLBACK Procedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 		break;
 	case WM_DESTROY:
 		cond.save_condition("save_condition.txt");
+		cond.active = false;
 		PostQuitMessage(0);
 		break;
 	case WM_LBUTTONDOWN:

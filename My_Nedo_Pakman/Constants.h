@@ -7,6 +7,7 @@
 #define PAINT_FIELD 2
 #define PAINT_BUTTON_AND_FIELD 3
 #define PAINT_DIFFICULTY 4
+#define PAINT_GAME_ELEMS 5
 #define PAINT_ALL 10
 
 //cond.pressed_button
@@ -19,14 +20,7 @@
 #define BUTTON_PAUSE 6
 #define TEXTURE_DIFFICULTY 5
 
-// cond.Textures[index]
-// index
 const size_t textures_quantity = 7;
-//#define TEXTURE_BUTTON_PLAY 2
-//#define TEXTURE_BUTTON_MAPS 3
-//#define TEXTURE_BUTTON_DIFFICULTY 4
-//#define TEXTURE_BUTTON_TOOLS 5
-//#define TEXTURE_BUTTON_HELP 6
 
 const size_t maps_quantity = 3;
 const int map0_x = 61, map0_y = 33, maps_dist_x = 63, maps_dist_y = 35;
@@ -89,3 +83,8 @@ const std::string star_file_names[2][2] = { { "star_lite_passive.bmp", "star_lit
 	{ "star_dark_passive.bmp", "star_dark_active.bmp" } };
 
 const std::wstring help_text = L"Здесь инфа \nОп новая строка\n0:\n1:\n2:\n3:\n4:\n5:\n6:\n7:\n8:\n9:";
+
+const int start_player_coords[2] = { 92, 1 }, player_speed[4] = { 15, 18, 21, 24 };
+const int start_enemy_coords[3][2] = { { 1, 50 }, { 92, 99 }, { 183, 50 } }, enemy_speed[4] = { 16, 20, 24, 28 };
+
+const long game_duration = 120000, start_fuel_timer = 10000, fuel_timer_rising = 10000;

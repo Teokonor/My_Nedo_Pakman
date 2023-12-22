@@ -22,6 +22,9 @@ void Painter::paint(Condition& cond) {
 	case PAINT_DIFFICULTY:
 		paint_difficulty(cond);
 		break;
+	case PAINT_GAME_ELEMS:
+		paint_game_elems(cond);
+		break;
 	case PAINT_ALL:
 		paint_all(cond);
 		break;
@@ -71,6 +74,8 @@ void WinApi_painter::paint_difficulty(Condition& cond) {
 	paint_stars(cond);
 }
 
+
+
 void WinApi_painter::paint_timer(Condition& cond, int x, int y, int seconds) {
 	RECT border_rect = { x, y, x + icons[FUEL_TIMER][WIDTH], y + icons[FUEL_TIMER][HEIGHT] };
 	FillRect(hdc, &border_rect, CreateSolidBrush(get_color(timer_border_color)));
@@ -101,6 +106,27 @@ void WinApi_painter::paint_stars(Condition& cond) {
 		paint_icon(x, icons[STARS][Y_coord], icons[STARS][HEIGHT], icons[STARS][HEIGHT], 
 			star_file_names[cond.theme_is_dark][score / score_to_star != 0]);
 		x -= icons[STARS][HEIGHT];
+	}
+}
+
+void WinApi_painter::paint_game_elems(Condition& cond) {
+	if (cond.change_game_timer) {
+		paint_timer(cond, icons[GAME_TIMER][X_coord], icons[GAME_TIMER][Y_coord], cond.game_timer_value);
+		cond.change_game_timer = false;
+	}
+	if (cond.change_fuel_timer) {
+		paint_timer(cond, icons[FUEL_TIMER][X_coord], icons[FUEL_TIMER][Y_coord], cond.fuel_timer_value);
+		cond.change_fuel_timer = false;
+	}
+	if (cond.change_player_pos) {
+
+		cond.change_player_pos = false;
+	}
+	for (size_t i = 0; i < 3; i++) {
+		if (cond.change_enemy_pos[i]) {
+
+			cond.change_enemy_pos[i] = false;
+		}
 	}
 }
 
