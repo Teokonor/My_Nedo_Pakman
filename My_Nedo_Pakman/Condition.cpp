@@ -106,7 +106,7 @@ void Condition::process_game() {
 	fuel_timer_value = (fuel_time + game_started - std::clock()) / 1000;*/
 	paint = PAINT_GAME_ELEMS;
 	//UpdateWindow(hWnd);
-	RedrawWindow(hWnd, NULL, NULL, RDW_UPDATENOW | RDW_INVALIDATE);
+	RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
 }
 
 void Condition::pause_game() {
