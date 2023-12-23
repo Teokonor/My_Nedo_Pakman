@@ -64,7 +64,7 @@ void change_status_by_button_click(Condition& cond) {
 	if (cond.status == 20 && cond.pressed_button == BUTTON_PLAY) {
 		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PAUSE][cond.theme_is_dark][cond.button_is_pressed];
 		cond.start_game();
-		cond.paint = PAINT_BUTTON_AND_FIELD;
+		cond.paint = PAINT_BUTTON_AND_GAME_ELEMS;
 		return;
 	}
 	if (cond.status == 21 && cond.pressed_button == BUTTON_PLAY) {

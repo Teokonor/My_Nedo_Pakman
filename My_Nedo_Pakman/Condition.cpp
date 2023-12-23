@@ -76,29 +76,33 @@ void Condition::start_game() {
 	for (Enemy& en : enemies) {
 		en.start(game_started);
 	}
+	for (size_t i = 0; i < 3; i++) {
+		enemies[i].start(game_started);
+	}
 }
 
 void Condition::process_game() {
 	if (status != 21) {
 		return;
 	}
-	change_player_pos = pl.move(walls_map, std::clock());
+	clock_t now = std::clock();
+	change_player_pos = pl.move(walls_map, now);
 	for (size_t i = 0; i < 3; i ++) {
-		change_enemy_pos[i] = enemies[i].move(walls_map, pl.x(), pl.y(), std::clock());
+		change_enemy_pos[i] = enemies[i].move(walls_map, pl.x(), pl.y(), now);
 		if (enemies[i].catch_player(pl.x(), pl.y())) {
 			stop_game();
 			return;
 		}
 	}
-	if (std::clock() - game_started > game_time || std::clock() - game_started > fuel_time) {
+	if (now - game_started > game_time || now - game_started > fuel_time) {
 		stop_game();
 	}
-	if (game_timer_value != (game_time + game_started - std::clock()) / 1000 + 1) {
-		game_timer_value = (game_time + game_started - std::clock()) / 1000 + 1;
+	if (game_timer_value != (game_time + game_started - now - 1) / 1000 + 1) {
+		game_timer_value = (game_time + game_started - now - 1) / 1000 + 1;
 		change_game_timer = true;
 	}
-	if (fuel_timer_value != (fuel_time + game_started - std::clock()) / 1000 + 1) {
-		fuel_timer_value = (fuel_time + game_started - std::clock()) / 1000 + 1;
+	if (fuel_timer_value != (fuel_time + game_started - now - 1) / 1000 + 1) {
+		fuel_timer_value = (fuel_time + game_started - now - 1) / 1000 + 1;
 		change_fuel_timer = true;
 	}
 	paint = PAINT_GAME_ELEMS;
@@ -121,5 +125,8 @@ void Condition::resume_game() {
 }
 
 void Condition::stop_game() {
+	if (status != 21 && status != 22) {
+		return;
+	}
 	status = 20;
 }

@@ -8,6 +8,7 @@
 #define PAINT_BUTTON_AND_FIELD 3
 #define PAINT_DIFFICULTY 4
 #define PAINT_GAME_ELEMS 5
+#define PAINT_BUTTON_AND_GAME_ELEMS 6
 #define PAINT_ALL 10
 
 //cond.pressed_button

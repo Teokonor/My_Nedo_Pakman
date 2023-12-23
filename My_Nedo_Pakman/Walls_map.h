@@ -15,7 +15,7 @@ public:
 	}
 	void read_walls(std::istream& input);
 	void read_walls(std::string file_name);
-	bool wall_at_point(unsigned short x, unsigned short y) {
+	bool wall_at_point(int x, int y) {
 		return walls[y * field_width + x];
 	}
 };

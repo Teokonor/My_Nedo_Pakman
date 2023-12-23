@@ -25,6 +25,10 @@ void Painter::paint(Condition& cond) {
 	case PAINT_GAME_ELEMS:
 		paint_game_elems(cond);
 		break;
+	case PAINT_BUTTON_AND_GAME_ELEMS:
+		paint_button(cond);
+		paint_game_elems(cond);
+		break;
 	case PAINT_ALL:
 		paint_all(cond);
 		break;

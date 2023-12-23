@@ -44,6 +44,7 @@ LRESULT CALLBACK Procedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 	case WM_CREATE:
 		break;
 	case WM_DESTROY:
+		cond.stop_game();
 		cond.save_condition("save_condition.txt");
 		cond.active = false;
 		PostQuitMessage(0);
