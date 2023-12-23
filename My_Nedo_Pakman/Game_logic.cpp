@@ -15,11 +15,14 @@ bool Player::change_direction(int new_dir) {
 bool Player::move(Walls_map& walls, clock_t current_time) {
 	if (current_time - start_time > cells_passed * millisec_in_cell) {
 		cells_passed++;
-		int new_x = x_ + (direction == RIGHT) - (direction == LEFT), new_y = y_ + (direction == DOWN) - (direction == UP);
-		if (!walls.wall_at_point(new_x, new_y)) {
-			x_ = new_x; y_ = new_y;
-			return true;
+		int x2 = x_ + ((direction == RIGHT) - (direction == LEFT)) * 2, y2 = y_ + ((direction == DOWN) - (direction == UP)) * 2,
+			x1 = x2 - (direction == UP || direction == DOWN), y1 = y2 - (direction == RIGHT || direction == LEFT),
+			x3 = x2 + (direction == UP || direction == DOWN), y3 = y2 + (direction == RIGHT || direction == LEFT);
+		if (walls.wall_at_point(x1, y1) || walls.wall_at_point(x2, y2) || walls.wall_at_point(x3, y3)) {
+			return false;
 		}
+		x_ = (x_ + x2) / 2; y_ = (y_ + y2) / 2;
+		return true;
 	}
 	return false;
 }

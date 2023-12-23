@@ -19,8 +19,10 @@
 #define BUTTON_BACK 5
 #define BUTTON_PAUSE 6
 #define TEXTURE_DIFFICULTY 5
+#define TEXTURE_PLAYER 6
+#define TEXTURE_ENEMY 7
 
-const size_t textures_quantity = 7;
+const size_t textures_quantity = 8;
 
 const size_t maps_quantity = 3;
 const int map0_x = 61, map0_y = 33, maps_dist_x = 63, maps_dist_y = 35;
@@ -84,7 +86,9 @@ const std::string star_file_names[2][2] = { { "star_lite_passive.bmp", "star_lit
 
 const std::wstring help_text = L"Здесь инфа \nОп новая строка\n0:\n1:\n2:\n3:\n4:\n5:\n6:\n7:\n8:\n9:";
 
-const int start_player_coords[2] = { 92, 1 }, player_speed[4] = { 15, 18, 21, 24 };
-const int start_enemy_coords[3][2] = { { 1, 50 }, { 92, 99 }, { 183, 50 } }, enemy_speed[4] = { 16, 20, 24, 28 };
+const int start_player_coords[2] = { 92, 2 }, player_speed[4] = { 15, 18, 21, 24 };
+const int start_enemy_coords[3][2] = { { 2, 50 }, { 92, 98 }, { 182, 50 } }, enemy_speed[4] = { 16, 20, 24, 28 };
+const std::string player_file_names[2] = { "player_lite.bmp", "player_dark.bmp" };
+const std::string enemy_file_names[2] = { "enemy_lite.bmp", "enemy_dark.bmp" };
 
 const long game_duration = 120000, start_fuel_timer = 10000, fuel_timer_rising = 10000;

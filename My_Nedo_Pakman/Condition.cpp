@@ -30,6 +30,8 @@ void Condition::init_textures() {
 		Textures[button_num] = button_file_names[button_num][theme_is_dark][button_is_pressed];
 	}
 	Textures[TEXTURE_DIFFICULTY] = difficulty_file_names[difficulty][theme_is_dark];
+	Textures[TEXTURE_PLAYER] = player_file_names[theme_is_dark];
+	Textures[TEXTURE_ENEMY] = enemy_file_names[theme_is_dark];
 }
 
 void Condition::init_colors() {
@@ -90,22 +92,15 @@ void Condition::process_game() {
 	if (std::clock() - game_started > game_time || std::clock() - game_started > fuel_time) {
 		stop_game();
 	}
-	if (game_timer_value != (game_time + game_started - std::clock()) / 1000) {
-		game_timer_value = (game_time + game_started - std::clock()) / 1000;
+	if (game_timer_value != (game_time + game_started - std::clock()) / 1000 + 1) {
+		game_timer_value = (game_time + game_started - std::clock()) / 1000 + 1;
 		change_game_timer = true;
-		//MessageBoxA(hWnd, "Hey Hey!!", "Paint opened", MB_OK);
 	}
-	if (fuel_timer_value != (fuel_time + game_started - std::clock()) / 1000) {
-		fuel_timer_value = (fuel_time + game_started - std::clock()) / 1000;
+	if (fuel_timer_value != (fuel_time + game_started - std::clock()) / 1000 + 1) {
+		fuel_timer_value = (fuel_time + game_started - std::clock()) / 1000 + 1;
 		change_fuel_timer = true;
-		//MessageBoxA(hWnd, "Hey Hey!!", "Paint opened", MB_OK);
 	}
-	/*change_game_timer = (game_timer_value != (game_time + game_started - std::clock()) / 1000);
-	game_timer_value = (game_time + game_started - std::clock()) / 1000;
-	change_fuel_timer = (fuel_timer_value != (fuel_time + game_started - std::clock()) / 1000);
-	fuel_timer_value = (fuel_time + game_started - std::clock()) / 1000;*/
 	paint = PAINT_GAME_ELEMS;
-	//UpdateWindow(hWnd);
 	RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
 }
 
