@@ -55,7 +55,7 @@ void change_status_by_button_click(Condition& cond) {
 		cond.paint = PAINT_BUTTON_AND_FIELD;
 		return;
 	}
-	if (cond.status / 10 != 2 && cond.pressed_button != BUTTON_PLAY) {
+	if ((cond.status / 10 != 2 || cond.status == 20) && cond.pressed_button != BUTTON_PLAY) {
 		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
 		cond.status = (cond.pressed_button + 2) * 10;
 		cond.paint = PAINT_BUTTON_AND_FIELD;

@@ -45,6 +45,7 @@ void Enemy::init(int number, int difficulty) {
 	y_ = start_enemy_coords[number][Y_coord];
 	lastX = x_; lastY = y_;
 	speed = enemy_speed[difficulty];
+	millisec_in_cell = 1000. / (double)speed;
 }
 
 void Enemy::start(clock_t current_time) {
@@ -55,11 +56,23 @@ void Enemy::start(clock_t current_time) {
 }
 
 bool Enemy::see_player(Walls_map& walls, int player_x, int player_y) {
+	return false;
+}
+
+bool Enemy::move(Walls_map& walls, int player_x, int player_y, clock_t current_time) {
 	double real_x = (double)x_ + 0.5, real_y = (double)y_ + 0.5, x0 = real_x, y0 = real_y,
 		real_p_x = (double)player_x + 0.5, real_p_y = (double)player_y + 0.5;
 	int int_x = x_, int_y = y_;
 	int dir_x = player_x > x_ ? 1 : -1, dir_y = player_y > y_ ? 1 : -1;
 	double tg = player_x == x_ ? 1000. : (real_p_y - real_y) / (real_p_x = real_x);
+	int next_x = y0 + (real_x + 0.5 * (double)dir_x - x0) * tg > real_y + 0.5 * (double)dir_y ? int_x : int_x + dir_x,
+		next_y = y0 + (real_x + 0.5 * (double)dir_x - x0) * tg > real_y + 0.5 * (double)dir_y ? int_y + dir_y : int_y;
+	double start_dist = sqrt((real_p_x - real_x) * (real_p_x - real_x) + (real_p_y - real_y) * (real_p_y - real_y)),
+		next_dist = sqrt((real_p_x - next_x) * (real_p_x - next_x) + (real_p_y - next_y) * (real_p_y - next_y));
+	if ((double)(current_time - start_time) <= cells_passed * millisec_in_cell) {
+		return false;
+	}
+	cells_passed += (start_dist - next_dist);
 	while (int_x != player_x || int_y != player_y) {
 		if (walls.wall_at_point(int_x, int_y)) {
 			return false;
@@ -73,11 +86,9 @@ bool Enemy::see_player(Walls_map& walls, int player_x, int player_y) {
 			int_x += dir_x;
 		}
 	}
+	lastX = x_; lastY = y_;
+	x_ = next_x; y_ = next_y;
 	return true;
-}
-
-bool Enemy::move(Walls_map& walls, int player_x, int player_y, clock_t current_time) {
-	return false;
 }
 
 bool Enemy::catch_player(int player_x, int player_y) {

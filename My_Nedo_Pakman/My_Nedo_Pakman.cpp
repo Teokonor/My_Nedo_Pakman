@@ -50,11 +50,11 @@ LRESULT CALLBACK Procedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 		break;
 	case WM_LBUTTONDOWN:
 		left_button_down(cond, GET_X_LPARAM(lp), GET_Y_LPARAM(lp));
-		RedrawWindow(hWnd, NULL, NULL, RDW_UPDATENOW | RDW_INVALIDATE);
+		RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
 		break;
 	case WM_LBUTTONUP:
 		left_button_up(cond, GET_X_LPARAM(lp), GET_Y_LPARAM(lp));
-		RedrawWindow(hWnd, NULL, NULL, RDW_UPDATENOW | RDW_INVALIDATE);
+		RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
 		break;
 	case WM_KEYDOWN:
 		keydown(cond, wp);

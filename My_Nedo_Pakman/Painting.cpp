@@ -227,7 +227,7 @@ void WinApi_painter::paint_game_elems(Condition& cond) {
 	}
 	for (size_t i = 0; i < 3; i++) {
 		if (cond.change_enemy_pos[i]) {
-
+			paint_enemy(cond, i);
 			cond.change_enemy_pos[i] = false;
 		}
 	}

@@ -76,7 +76,6 @@ void Condition::start_game() {
 	for (Enemy& en : enemies) {
 		en.start(game_started);
 	}
-	RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
 }
 
 void Condition::process_game() {
