@@ -81,7 +81,7 @@ void Condition::process_game() {
 	if (status != 21) {
 		return;
 	}
-	pl.move(walls_map, std::clock());
+	change_player_pos = pl.move(walls_map, std::clock());
 	for (size_t i = 0; i < 3; i ++) {
 		change_enemy_pos[i] = enemies[i].move(walls_map, pl.x(), pl.y(), std::clock());
 		if (enemies[i].catch_player(pl.x(), pl.y())) {

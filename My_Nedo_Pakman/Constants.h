@@ -91,4 +91,7 @@ const int start_enemy_coords[3][2] = { { 2, 50 }, { 92, 98 }, { 182, 50 } }, ene
 const std::string player_file_names[2] = { "player_lite.bmp", "player_dark.bmp" };
 const std::string enemy_file_names[2] = { "enemy_lite.bmp", "enemy_dark.bmp" };
 
+const int keyboard_letter_codes[4] = { 87, 65, 68, 83 };
+const int keyboard_arrow_codes[4] = { 38, 37, 39, 40 };
+
 const long game_duration = 120000, start_fuel_timer = 10000, fuel_timer_rising = 10000;

@@ -21,6 +21,7 @@ bool Player::move(Walls_map& walls, clock_t current_time) {
 		if (walls.wall_at_point(x1, y1) || walls.wall_at_point(x2, y2) || walls.wall_at_point(x3, y3)) {
 			return false;
 		}
+		lastX = x_; lastY = y_;
 		x_ = (x_ + x2) / 2; y_ = (y_ + y2) / 2;
 		return true;
 	}
@@ -38,6 +39,7 @@ void Enemy::init(int number, int difficulty) {
 	num = number;
 	x_ = start_enemy_coords[number][X_coord];
 	y_ = start_enemy_coords[number][Y_coord];
+	lastX = x_; lastY = y_;
 	speed = enemy_speed[difficulty];
 }
 

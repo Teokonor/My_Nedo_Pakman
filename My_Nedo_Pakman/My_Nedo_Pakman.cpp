@@ -57,6 +57,7 @@ LRESULT CALLBACK Procedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 		RedrawWindow(hWnd, NULL, NULL, RDW_UPDATENOW | RDW_INVALIDATE);
 		break;
 	case WM_KEYDOWN:
+		keydown(cond, wp);
 		break;
 	case WM_PAINT:
 	{

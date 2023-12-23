@@ -122,3 +122,12 @@ void choosing_theme(Condition& cond, int x, int y) {
 		cond.paint = PAINT_ALL;
 	}
 }
+
+void keydown(Condition& cond, int key) {
+	for (int dir = UP; dir <= DOWN; dir++) {
+		if (key == keyboard_arrow_codes[dir] || key == keyboard_letter_codes[dir]) {
+			cond.pl.change_direction(dir);
+			return;
+		}
+	}
+}

@@ -14,3 +14,5 @@ void choosing_map(Condition& cond, int x, int y);
 void choosing_difficulty(Condition& cond, int x, int y);
 
 void choosing_theme(Condition& cond, int x, int y);
+
+void keydown(Condition& cond, int key);

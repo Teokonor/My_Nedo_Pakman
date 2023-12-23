@@ -199,7 +199,7 @@ void WinApi_painter::paint_help_field(Condition& cond) {
 
 void WinApi_painter::paint_player(Condition& cond) {
 	RECT old_rect = { field_x + (cond.pl.last_x() - 1) * 5, field_y + (cond.pl.last_y() - 1) * 5,
-		field_x + (cond.pl.last_x() + 1) * 5, field_y + (cond.pl.last_y() + 1) * 5 };
+		field_x + (cond.pl.last_x() + 2) * 5, field_y + (cond.pl.last_y() + 2) * 5 };
 	FillRect(hdc, &old_rect, CreateSolidBrush(cond.field_color));
 	paint_icon(field_x + (cond.pl.x() - 1) * 5, field_y + (cond.pl.y() - 1) * 5, 15, 15, cond.Textures[TEXTURE_PLAYER]);
 }
@@ -207,7 +207,7 @@ void WinApi_painter::paint_player(Condition& cond) {
 void WinApi_painter::paint_enemy(Condition& cond, int num) {
 	Enemy& en = cond.enemies[num];
 	RECT old_rect = { field_x + (en.last_x() - 1) * 5, field_y + (en.last_y() - 1) * 5,
-		field_x + (en.last_x() + 1) * 5, field_y + (en.last_y() + 1) * 5 };
+		field_x + (en.last_x() + 2) * 5, field_y + (en.last_y() + 2) * 5 };
 	FillRect(hdc, &old_rect, CreateSolidBrush(cond.field_color));
 	paint_icon(field_x + (en.x() - 1) * 5, field_y + (en.y() - 1) * 5, 15, 15, cond.Textures[TEXTURE_ENEMY]);
 }
@@ -222,7 +222,7 @@ void WinApi_painter::paint_game_elems(Condition& cond) {
 		cond.change_fuel_timer = false;
 	}
 	if (cond.change_player_pos) {
-
+		paint_player(cond);
 		cond.change_player_pos = false;
 	}
 	for (size_t i = 0; i < 3; i++) {
