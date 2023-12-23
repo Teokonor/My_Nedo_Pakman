@@ -22,6 +22,9 @@ public:
 	bool change_direction(int new_dir);
 	bool move(Walls_map& walls, clock_t current_time);
 	void change_difficulty(int difficulty);
+	void resume_after_pause(clock_t time_shift) {
+		start_time += time_shift;
+	}
 };
 
 class Enemy {
@@ -37,4 +40,7 @@ public:
 	bool see_player(Walls_map& walls, int player_x, int player_y);
 	bool move(Walls_map& walls, int player_x, int player_y, clock_t current_time);
 	bool catch_player(int player_x, int player_y);
+	void resume_after_pause(clock_t time_shift) {
+		start_time += time_shift;
+	}
 };

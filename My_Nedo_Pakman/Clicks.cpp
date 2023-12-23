@@ -55,16 +55,36 @@ void change_status_by_button_click(Condition& cond) {
 		cond.paint = PAINT_BUTTON_AND_FIELD;
 		return;
 	}
-	if (cond.pressed_button != BUTTON_PLAY) {
+	if (cond.status / 10 != 2 && cond.pressed_button != BUTTON_PLAY) {
 		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
 		cond.status = (cond.pressed_button + 2) * 10;
 		cond.paint = PAINT_BUTTON_AND_FIELD;
+		return;
 	}
 	if (cond.status == 20 && cond.pressed_button == BUTTON_PLAY) {
 		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PAUSE][cond.theme_is_dark][cond.button_is_pressed];
-		cond.status = 21;
 		cond.start_game();
+		cond.paint = PAINT_BUTTON_AND_FIELD;
+		return;
+	}
+	if (cond.status == 21 && cond.pressed_button == BUTTON_PLAY) {
+		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PLAY][cond.theme_is_dark][cond.button_is_pressed];
+		cond.pause_game();
 		cond.paint = PAINT_BUTTON;
+		return;
+	}
+	if (cond.status == 22 && cond.pressed_button == BUTTON_PLAY) {
+		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PAUSE][cond.theme_is_dark][cond.button_is_pressed];
+		cond.resume_game();
+		cond.paint = PAINT_BUTTON;
+		return;
+	}
+	if ((cond.status == 21 || cond.status == 22) && cond.pressed_button != BUTTON_PLAY) {
+		cond.stop_game();
+		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
+		cond.status = (cond.pressed_button + 2) * 10;
+		cond.paint = PAINT_BUTTON_AND_FIELD;
+		return;
 	}
 }
 

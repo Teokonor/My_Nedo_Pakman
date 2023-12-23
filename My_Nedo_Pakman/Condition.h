@@ -21,7 +21,7 @@ public:
 	short score = 0;
 	Player pl;
 	Enemy enemies[3];
-	clock_t game_started = 0, game_time = game_duration, fuel_time = start_fuel_timer;
+	clock_t game_started = 0, game_paused = 0, game_time = game_duration, fuel_time = start_fuel_timer;
 	bool change_game_timer = false, change_fuel_timer = false, change_player_pos = false, change_enemy_pos[3] = { false, false, false };
 	unsigned int game_timer_value = game_duration / 1000, fuel_timer_value = start_fuel_timer / 1000;
 

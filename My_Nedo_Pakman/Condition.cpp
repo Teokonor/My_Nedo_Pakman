@@ -70,11 +70,13 @@ void Condition::save_condition(const char file_name[]) {
 }
 
 void Condition::start_game() {
+	status = 21;
 	game_started = std::clock();
 	pl.start(game_started);
 	for (Enemy& en : enemies) {
 		en.start(game_started);
 	}
+	RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
 }
 
 void Condition::process_game() {
@@ -105,11 +107,20 @@ void Condition::process_game() {
 }
 
 void Condition::pause_game() {
-
+	status = 22;
+	game_paused = std::clock();
 }
+
 void Condition::resume_game() {
-
+	status = 21;
+	clock_t time_shift = std::clock() - game_paused;
+	game_started += time_shift;
+	pl.resume_after_pause(time_shift);
+	for (size_t i = 0; i < 3; i++) {
+		enemies[i].resume_after_pause(time_shift);
+	}
 }
+
 void Condition::stop_game() {
 	status = 20;
 }

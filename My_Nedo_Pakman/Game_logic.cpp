@@ -2,6 +2,10 @@
 
 void Player::start(clock_t current_time) {
 	start_time = current_time;
+	cells_passed = 0;
+	x_ = start_player_coords[X_coord];
+	y_ = start_player_coords[Y_coord];
+	lastX = x_; lastY = y_;
 }
 
 bool Player::change_direction(int new_dir) {
@@ -46,6 +50,7 @@ void Enemy::init(int number, int difficulty) {
 void Enemy::start(clock_t current_time) {
 	x_ = start_enemy_coords[num][X_coord];
 	y_ = start_enemy_coords[num][Y_coord];
+	lastX = x_; lastY = y_;
 	start_time = current_time;
 }
 
