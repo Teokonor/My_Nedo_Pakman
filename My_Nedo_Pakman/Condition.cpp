@@ -71,11 +71,12 @@ void Condition::save_condition(const char file_name[]) {
 }
 
 void Condition::start_game() {
-	status = 21;
+	status = 26;
 	particles_map.clear();
 	score = 0;
 	game_time = game_duration;
 	fuel_time = start_fuel_timer;
+	read_particles(shedule_of_particles, particles_file_names[map][difficulty]);
 	game_started = std::clock();
 	pl.start(game_started);
 	for (Enemy& en : enemies) {
@@ -88,7 +89,11 @@ void Condition::start_game() {
 
 void Condition::process_game() {
 	// process_game постоянно вызывается в главном цикле, но выполняться должен только в случае если игра идёт, так что проверка статуса
+	// status == 26 нужен в момент запуска игры, чтобы один раз обработалось WM_PAINT с флагом PAINT_BUTTON_AND_FIELD
 	if (status != 21) {
+		if (status == 26) {
+			status = 21;
+		}
 		return;
 	}
 	// Фиксируем время текущего момента
@@ -155,7 +160,7 @@ void Condition::pause_game() {
 }
 
 void Condition::resume_game() {
-	status = 21;
+	status = 26;
 	clock_t time_shift = std::clock() - game_paused;
 	game_started += time_shift;
 	pl.resume_after_pause(time_shift);
@@ -169,7 +174,7 @@ void Condition::stop_game() {
 		return;
 	}
 	status = 20;
-	scores[map][difficulty] = score;
+	scores[map][difficulty] = score > scores[map][difficulty] ? score : scores[map][difficulty];
 	paint = PAINT_RECORD;
 }
 
