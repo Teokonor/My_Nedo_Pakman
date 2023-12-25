@@ -21,7 +21,6 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	cond.hWnd = CreateWindowExW(0, L"MainWndClass", L"My Nedo Pakman", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 
 		window_start_x, window_start_y, window_start_width , window_start_height, NULL, NULL, NULL, NULL);
 
-	cond.init_condition("save_condition.txt");
 	painter.init_hWnd(cond.hWnd);
 	
 	MSG main_msg;

@@ -214,6 +214,36 @@ void WinApi_painter::paint_enemy(Condition& cond, int num) {
 		field_x + (en.last_x() + 2) * 5, field_y + (en.last_y() + 2) * 5 };
 	FillRect(hdc, &old_rect, CreateSolidBrush(cond.field_color));
 	paint_icon(field_x + (en.x() - 1) * 5, field_y + (en.y() - 1) * 5, 15, 15, cond.Textures[TEXTURE_ENEMY]);
+	if (en.last_x() != en.x()) {
+		int x = en.last_x() + (en.last_x() - en.x());
+		for (int y = en.y() - 1; y <= en.y() + 1; y++) {
+			auto iter = cond.particles_map.find({ x, y });
+			if (iter != cond.particles_map.end()) {
+				paint_icon(field_x + x * 5, field_y + y * 5, 5, 5, particles_textures_file_names[iter->second][cond.theme_is_dark]);
+			}
+		}
+	}
+	else if (en.last_y() != en.y()) {
+		int y = en.last_y() + (en.last_y() - en.y());
+		for (int x = en.x() - 1; x <= en.x() + 1; x++) {
+			auto iter = cond.particles_map.find({ x, y });
+			if (iter != cond.particles_map.end()) {
+				paint_icon(field_x + x * 5, field_y + y * 5, 5, 5, particles_textures_file_names[iter->second][cond.theme_is_dark]);
+			}
+		}
+	}
+}
+
+void WinApi_painter::paint_particles(Condition& cond) {
+	while (cond.deleting_particles.size() > 0) {
+		coords& co = cond.deleting_particles.front();
+		RECT rect = { field_x + co.x * 5, field_y + co.y * 5, field_x + (co.x + 1) * 5, field_y + (co.y + 1) * 5 };
+		FillRect(hdc, &rect, CreateSolidBrush(cond.field_color));
+		cond.deleting_particles.pop_front();
+	}
+	for (const std::pair<coords, int>& p : cond.particles_map) {
+		paint_icon(field_x + p.first.x * 5, field_y + p.first.y * 5, 5, 5, particles_textures_file_names[p.second][cond.theme_is_dark]);
+	}
 }
 
 void WinApi_painter::paint_game_elems(Condition& cond) {
@@ -225,6 +255,7 @@ void WinApi_painter::paint_game_elems(Condition& cond) {
 		paint_timer(cond, icons[FUEL_TIMER][X_coord], icons[FUEL_TIMER][Y_coord], cond.fuel_timer_value);
 		cond.change_fuel_timer = false;
 	}
+	paint_particles(cond);
 	if (cond.change_player_pos) {
 		paint_player(cond);
 		cond.change_player_pos = false;

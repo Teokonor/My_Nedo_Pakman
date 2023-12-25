@@ -13,6 +13,7 @@ void Condition::init_condition(std::istream& input) {
 		}
 	}
 	walls_map.read_walls(map_file_names[map]);
+	read_particles(shedule_of_particles, particles_file_names[map][difficulty]);
 	init_colors();
 	Textures.fill("");
 	init_textures();
@@ -71,6 +72,10 @@ void Condition::save_condition(const char file_name[]) {
 
 void Condition::start_game() {
 	status = 21;
+	particles_map.clear();
+	score = 0;
+	game_time = game_duration;
+	fuel_time = start_fuel_timer;
 	game_started = std::clock();
 	pl.start(game_started);
 	for (Enemy& en : enemies) {
@@ -82,11 +87,43 @@ void Condition::start_game() {
 }
 
 void Condition::process_game() {
+	// process_game постоянно вызывается в главном цикле, но выполняться должен только в случае если игра идёт, так что проверка статуса
 	if (status != 21) {
 		return;
 	}
+	// Фиксируем время текущего момента
 	clock_t now = std::clock();
+	// Смотрим расписание частиц. Обрабатываем все его элементы, чьё время меньше либо равно текущему
+	while (shedule_of_particles.size() > 0) {
+		Particle particle = shedule_of_particles.front();
+		if (particle.time > now - game_started) {
+			break;
+		}
+		if (particle.adding) {
+			coords co = { particle.x, particle.y };
+			particles_map.insert({ co , particle.type });
+		}
+		else /*if (particles_map.find({ particle.x, particle.y }) != particles_map.end())*/ {
+			particles_map.erase({ particle.x, particle.y });
+			deleting_particles.push_back({ particle.x, particle.y });
+		}
+		shedule_of_particles.pop_front();
+	}
+	// Вызываем метод движения игрока. Тот уже сам определяет, двинется игрок или нет
 	change_player_pos = pl.move(walls_map, now);
+	// Осматриваем текущий + предыдущий хитбокс игрока. Если в нём есть частица, съедаем её
+	for (int x = (pl.x() < pl.last_x() ? pl.x() : pl.last_x()) - 1; x <= (pl.x() > pl.last_x() ? pl.x() : pl.last_x()) + 1; x++) {
+		for (int y = (pl.y() < pl.last_y() ? pl.y() : pl.last_y()) - 1; y <= (pl.y() > pl.last_y() ? pl.y() : pl.last_y()) + 1; y++) {
+	/*for (int x = min(pl.x(), pl.last_x()) - 1; x <= max(pl.x(), pl.last_x()) + 1; x++) {
+		for (int y = min(pl.y(), pl.last_y()) - 1; y <= max(pl.y(), pl.last_y()) + 1; y++) {*/
+			auto elem = particles_map.find({ x, y });
+			if (elem != particles_map.end()) {
+				take_particle(elem->second);
+				particles_map.erase(elem);
+			}
+		}
+	}
+	// Вызываем методы движения врагов. Также, проверяем, не поймал ли один из них игрока
 	for (size_t i = 0; i < 3; i ++) {
 		change_enemy_pos[i] = enemies[i].move(walls_map, pl.x(), pl.y(), now);
 		if (enemies[i].catch_player(pl.x(), pl.y())) {
@@ -94,9 +131,11 @@ void Condition::process_game() {
 			return;
 		}
 	}
+	// Проверяем, не закончилось ли время на таймерах
 	if (now - game_started > game_time || now - game_started > fuel_time) {
 		stop_game();
 	}
+	// Пересчитываем видимые значения таймеров и отмечаем, что их нужно перерисовать, если эти значения изменились
 	if (game_timer_value != (game_time + game_started - now - 1) / 1000 + 1) {
 		game_timer_value = (game_time + game_started - now - 1) / 1000 + 1;
 		change_game_timer = true;
@@ -105,6 +144,7 @@ void Condition::process_game() {
 		fuel_timer_value = (fuel_time + game_started - now - 1) / 1000 + 1;
 		change_fuel_timer = true;
 	}
+	// Ставим нужный paint фраг и вызываем событие WM_PAINT
 	paint = PAINT_GAME_ELEMS;
 	RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
 }
@@ -129,4 +169,19 @@ void Condition::stop_game() {
 		return;
 	}
 	status = 20;
+	scores[map][difficulty] = score;
+}
+
+void Condition::take_particle(int type) {
+	switch (type)
+	{
+	case FUEL_TYPE:
+		fuel_time += fuel_timer_rising;
+		break;
+	case SCORE_TYPE:
+		score++;
+		break;
+	default:
+		break;
+	}
 }

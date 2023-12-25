@@ -96,3 +96,15 @@ const int keyboard_letter_codes[4] = { 87, 65, 68, 83 };
 const int keyboard_arrow_codes[4] = { 38, 37, 39, 40 };
 
 const long game_duration = 120000, start_fuel_timer = 10000, fuel_timer_rising = 10000;
+
+const size_t types_of_particle = 2;
+const long particles_life_length = 20000;
+const std::string particles_file_names[maps_quantity][4] = { 
+	{ "particles 0 0.txt", "particles 0 1.txt", "particles 0 2.txt", "particles 0 3.txt" }, 
+	{ "particles 1 0.txt", "particles 1 1.txt", "particles 1 2.txt", "particles 1 3.txt" },
+	{ "particles 2 0.txt", "particles 2 1.txt", "particles 2 2.txt", "particles 2 3.txt" }
+};
+#define FUEL_TYPE 1
+#define SCORE_TYPE 2
+const std::string particles_textures_file_names[types_of_particle + 1][2] = { { "", "" },
+	{ "particle_fuel_lite.bmp", "particle_fuel_dark.bmp" }, { "particle_score_lite.bmp", "particle_score_dark.bmp" } };

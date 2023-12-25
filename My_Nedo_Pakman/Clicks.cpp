@@ -112,6 +112,7 @@ void choosing_map(Condition& cond, int x, int y) {
 		cond.status = 20;
 		cond.map = map_num;
 		cond.walls_map.read_walls(map_file_names[map_num]);
+		read_particles(cond.shedule_of_particles, particles_file_names[cond.map][cond.difficulty]);
 		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PLAY][cond.theme_is_dark][cond.button_is_pressed];
 		cond.paint = PAINT_BUTTON_AND_FIELD;
 	}

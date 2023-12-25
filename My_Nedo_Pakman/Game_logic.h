@@ -1,5 +1,5 @@
 #pragma once
-#include "Walls_map.h"
+#include "Map_info.h"
 
 #define UP 0
 #define LEFT 1

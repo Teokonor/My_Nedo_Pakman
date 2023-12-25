@@ -2,7 +2,21 @@
 #include "Game_logic.h"
 #include <iostream>
 #include <array>
+#include <map>
 #include <Windows.h>
+
+struct coords {
+	int x, y;
+	bool operator<(const coords& other) const {
+		if (x == other.x) {
+			return y < other.y;
+		}
+		return x < other.x;
+	}
+	bool operator==(const coords& other) const {
+		return x == other.x && y == other.y;
+	}
+};
 
 class Condition {
 public:
@@ -16,6 +30,9 @@ public:
 	bool theme_is_dark, button_is_pressed = false;
 	COLORREF BG_color, field_color, walls_color, text_color;
 	Walls_map walls_map;
+	std::list<Particle> shedule_of_particles;
+	std::map<coords, int> particles_map;
+	std::list<coords> deleting_particles;
 	std::array<std::string, textures_quantity> Textures;
 	std::array<std::array<short, 4>, maps_quantity> scores;
 	short score = 0;
@@ -40,6 +57,7 @@ public:
 	void pause_game();
 	void resume_game();
 	void stop_game();
+	void take_particle(int type);
 };
 
 COLORREF get_color(unsigned long HEX_code);
