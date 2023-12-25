@@ -170,6 +170,7 @@ void Condition::stop_game() {
 	}
 	status = 20;
 	scores[map][difficulty] = score;
+	paint = PAINT_RECORD;
 }
 
 void Condition::take_particle(int type) {
@@ -180,6 +181,7 @@ void Condition::take_particle(int type) {
 		break;
 	case SCORE_TYPE:
 		score++;
+		change_score = true;
 		break;
 	default:
 		break;

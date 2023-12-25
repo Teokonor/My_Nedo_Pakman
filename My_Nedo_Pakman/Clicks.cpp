@@ -33,7 +33,7 @@ void left_button_up(Condition& cond, int x, int y) {
 			if (cond.status / 10 != 2) {
 				cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
 			}
-			else if (cond.status == 25) {
+			else if (cond.status == 20) {
 				cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_PAUSE][cond.theme_is_dark][cond.button_is_pressed];
 			}
 		}
@@ -83,7 +83,7 @@ void change_status_by_button_click(Condition& cond) {
 		cond.stop_game();
 		cond.Textures[BUTTON_PLAY] = button_file_names[BUTTON_BACK][cond.theme_is_dark][cond.button_is_pressed];
 		cond.status = (cond.pressed_button + 2) * 10;
-		cond.paint = PAINT_BUTTON_AND_FIELD;
+		cond.paint = PAINT_BUTTON_AND_FIELD_AND_RECORD;
 		return;
 	}
 }

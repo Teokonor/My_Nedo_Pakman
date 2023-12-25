@@ -29,6 +29,16 @@ void Painter::paint(Condition& cond) {
 		paint_button(cond);
 		paint_game_elems(cond);
 		break;
+	case PAINT_RECORD:
+		paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
+		paint_stars(cond);
+		break;
+	case PAINT_BUTTON_AND_FIELD_AND_RECORD:
+		paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
+		paint_stars(cond);
+		paint_button(cond);
+		paint_field(cond);
+		break;
 	case PAINT_ALL:
 		paint_all(cond);
 		break;
@@ -254,6 +264,10 @@ void WinApi_painter::paint_game_elems(Condition& cond) {
 	if (cond.change_fuel_timer) {
 		paint_timer(cond, icons[FUEL_TIMER][X_coord], icons[FUEL_TIMER][Y_coord], cond.fuel_timer_value);
 		cond.change_fuel_timer = false;
+	}
+	if (cond.change_score) {
+		paint_score(cond, icons[SCORE_COUNTER][X_coord], icons[SCORE_COUNTER][Y_coord], cond.score);
+		cond.change_score = false;
 	}
 	paint_particles(cond);
 	if (cond.change_player_pos) {
