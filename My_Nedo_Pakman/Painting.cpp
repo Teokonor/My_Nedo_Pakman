@@ -33,6 +33,11 @@ void Painter::paint(Condition& cond) {
 		paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
 		paint_stars(cond);
 		break;
+	case PAINT_BUTTON_AND_RECORD:
+		paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
+		paint_stars(cond);
+		paint_button(cond);
+		break;
 	case PAINT_BUTTON_AND_FIELD_AND_RECORD:
 		paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
 		paint_stars(cond);

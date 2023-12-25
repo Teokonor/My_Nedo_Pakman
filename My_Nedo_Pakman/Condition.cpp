@@ -139,6 +139,7 @@ void Condition::process_game() {
 	// Проверяем, не закончилось ли время на таймерах
 	if (now - game_started > game_time || now - game_started > fuel_time) {
 		stop_game();
+		return;
 	}
 	// Пересчитываем видимые значения таймеров и отмечаем, что их нужно перерисовать, если эти значения изменились
 	if (game_timer_value != (game_time + game_started - now - 1) / 1000 + 1) {
@@ -175,7 +176,9 @@ void Condition::stop_game() {
 	}
 	status = 20;
 	scores[map][difficulty] = score > scores[map][difficulty] ? score : scores[map][difficulty];
-	paint = PAINT_RECORD;
+	Textures[BUTTON_PLAY] = button_file_names[BUTTON_PLAY][theme_is_dark][button_is_pressed];
+	paint = PAINT_BUTTON_AND_RECORD;
+	RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
 }
 
 void Condition::take_particle(int type) {
