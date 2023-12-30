@@ -175,6 +175,8 @@ void Condition::stop_game() {
 		return;
 	}
 	status = 20;
+	game_time = game_duration; fuel_time = start_fuel_timer;
+	game_timer_value = game_duration / 1000; fuel_timer_value = start_fuel_timer / 1000;
 	scores[map][difficulty] = score > scores[map][difficulty] ? score : scores[map][difficulty];
 	Textures[BUTTON_PLAY] = button_file_names[BUTTON_PLAY][theme_is_dark][button_is_pressed];
 	paint = PAINT_BUTTON_AND_RECORD;

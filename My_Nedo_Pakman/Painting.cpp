@@ -37,12 +37,16 @@ void Painter::paint(Condition& cond) {
 		paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
 		paint_stars(cond);
 		paint_button(cond);
+		paint_timer(cond, icons[GAME_TIMER][X_coord], icons[GAME_TIMER][Y_coord], cond.game_timer_value);
+		paint_timer(cond, icons[FUEL_TIMER][X_coord], icons[FUEL_TIMER][Y_coord], cond.fuel_timer_value);
 		break;
 	case PAINT_BUTTON_AND_FIELD_AND_RECORD:
 		paint_score(cond, icons[SCORE_RECORD][X_coord], icons[SCORE_RECORD][Y_coord], cond.scores[cond.map][cond.difficulty]);
 		paint_stars(cond);
 		paint_button(cond);
 		paint_field(cond);
+		paint_timer(cond, icons[GAME_TIMER][X_coord], icons[GAME_TIMER][Y_coord], cond.game_timer_value);
+		paint_timer(cond, icons[FUEL_TIMER][X_coord], icons[FUEL_TIMER][Y_coord], cond.fuel_timer_value);
 		break;
 	case PAINT_ALL:
 		paint_all(cond);
