@@ -28,11 +28,12 @@ void Walls_map::read_walls(std::string file_name) {
 }
 
 void read_particles(std::list<Particle>& shedule, std::istream& input) {
+	shedule.clear();
 	std::list<Particle> adding, deleting;
 	size_t quantity;
 	input >> quantity;
 	clock_t time; int type, x, y;
-	while (!input.eof()) {
+	for (size_t i = 0; i < quantity; i++) {
 		input >> time >> type >> x >> y;
 		Particle add(time, type, true, x, y), del(time + particles_life_length, type, false, x, y);
 		adding.push_back(add);
