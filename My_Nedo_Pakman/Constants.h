@@ -104,8 +104,8 @@ L"Добро пожаловать в игру NedoPakman\n\n"
 ;
 
 
-const int start_player_coords[2] = { 92, 2 }, player_speed[4] = { 15, 18, 21, 24 };
-const int start_enemy_coords[3][2] = { { 2, 50 }, { 92, 98 }, { 182, 50 } }, enemy_speed[4] = { 16, 20, 24, 28 };
+const int start_player_coords[2] = { 92, 2 }, start_enemy_coords[3][2] = { { 2, 50 }, { 92, 98 }, { 182, 50 } };
+const int player_speed[4] = { 15, 21, 27, 33 }; const double enemy_speed[4] = { 16., 22.4, 28.8, 35.2 };
 const std::string player_file_names[2] = { "player_lite.bmp", "player_dark.bmp" };
 const std::string enemy_file_names[2] = { "enemy_lite.bmp", "enemy_dark.bmp" };
 

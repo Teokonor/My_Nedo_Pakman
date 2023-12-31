@@ -46,7 +46,7 @@ void Enemy::init(int number, int difficulty) {
 	y_ = start_enemy_coords[number][Y_coord];
 	lastX = x_; lastY = y_;
 	speed = enemy_speed[difficulty];
-	millisec_in_cell = 1000. / (double)speed;
+	millisec_in_cell = 1000. / speed;
 }
 
 void Enemy::start(clock_t current_time) {

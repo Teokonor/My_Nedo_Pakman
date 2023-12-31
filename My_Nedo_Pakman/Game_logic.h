@@ -28,9 +28,9 @@ public:
 };
 
 class Enemy {
-	int x_, y_, lastX, lastY, speed, num = 0;
+	int x_, y_, lastX, lastY, num = 0;
 	clock_t start_time;
-	double millisec_in_cell = 0., cells_passed = 0.;
+	double speed, millisec_in_cell = 0., cells_passed = 0.;
 public:
 	int x() { return x_; }
 	int y() { return y_; }
